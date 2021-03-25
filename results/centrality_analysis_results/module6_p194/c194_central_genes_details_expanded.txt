@@ -1,0 +1,7 @@
+id	gene	disease	snp_disease	DC	CC	EC
+775	CACNA1C	shared	pbc,pso,sjs,sle	0.114	0.291	0.17
+779	CACNA1S	shared	as,ced,crd,ms,pso,ulc	0.083	0.28	0.142
+815	CAMK2A	ulc	ulc	0.073	0.297	0.154
+2890	GRIA1	ms	ms	0.088	0.287	0.215
+2903	GRIN2A	pso	pso	0.083	0.288	0.185
+2904	GRIN2B	crd	crd	0.093	0.294	0.209

@@ -1,0 +1,16 @@
+id	name	disease
+988	CDC5L	shared
+1665	DHX15	pso
+4686	NCBP1	ms
+4809	SNU13	shared
+5432	POLR2C	shared
+5434	POLR2E	crd
+6427	SRSF2	sle
+6430	SRSF5	sle
+6636	SNRPF	ced
+6638	SNRPN	pso
+10898	CPSF4	ssc
+23451	SF3B1	identical
+51340	CRNKL1	pso
+51362	CDC40	identical
+51593	SRRT	shared

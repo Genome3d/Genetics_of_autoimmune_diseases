@@ -1,0 +1,6 @@
+id	name	disease
+3074	HEXB	pso
+4353	MPO	ms
+9588	PRDX6	ms
+29952	DPP7	pso
+387921	NHLRC3	crd

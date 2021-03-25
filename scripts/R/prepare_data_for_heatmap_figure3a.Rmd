@@ -1,0 +1,141 @@
+---
+title: "Prepare_data_for_heatmap"
+author: "Sreemol Gokuladhas"
+date: "24/03/2021"
+output: html_document
+---
+
+```{r}
+## Set working directory 
+
+setwd("/Genetics_of_autoimmune_diseases/scripts/R")
+
+## Load gene map file
+
+mapfile <- read.delim("../../data/map_file_short.txt", header = T, sep = "\t")
+
+## Load cluster gene ids 
+
+mod1 <- read.delim("../../data/cluster_ids/module1_p216_ids.txt", header = F)
+names(mod1) = "id"
+
+mod2 <- read.delim("../../data/cluster_ids/module2_p345_ids.txt", header = F)
+names(mod2) = "id"
+
+mod3 <- read.delim("../../data/cluster_ids/module3_p164_ids.txt", header = F)
+names(mod3) = "id"
+
+mod4 <- read.delim("../../data/cluster_ids/module4_p171_ids.txt", header = F)
+names(mod4) = "id"
+
+mod5 <- read.delim("../../data/cluster_ids/module5_p177_ids.txt", header = F)
+names(mod5) = "id"
+
+mod6 <- read.delim("../../data/cluster_ids/module6_p194_ids.txt", header = F)
+names(mod6) = "id"
+
+mod7 <- read.delim("../../data/cluster_ids/module7_p472_ids.txt", header = F)
+names(mod7) = "id"
+
+mod8 <- read.delim("../../data/cluster_ids/module8_p170_ids.txt", header = F)
+names(mod8) = "id"
+
+mod9 <- read.delim("../../data/cluster_ids/module9_p122_ids.txt", header = F)
+names(mod9) = "id"
+
+mod10 <- read.delim("../../data/cluster_ids/module10_p79_ids.txt", header = F)
+names(mod10) = "id"
+
+mod11 <- read.delim("../../data/cluster_ids/module11_p123_ids.txt", header = F)
+names(mod11) = "id"
+
+mod12 <- read.delim("../../data/cluster_ids/module12_p220_ids.txt", header = F)
+names(mod12) = "id"
+
+mod13 <- read.delim("../../data/cluster_ids/module13_p150_ids.txt", header = F)
+names(mod13) = "id"
+
+mod14 <- read.delim("../../data/cluster_ids/module14_p73_ids.txt", header = F)
+names(mod14) = "id"
+```
+
+
+```{r}
+## Map gene ids to corresponding gene name and disease using mapfile
+
+mod1_mapped <- merge(mapfile, mod1, by = "id")
+mod2_mapped <- merge(mapfile, mod2, by = "id")
+mod3_mapped <- merge(mapfile, mod3, by = "id")
+mod4_mapped <- merge(mapfile, mod4, by = "id")
+mod5_mapped <- merge(mapfile, mod5, by = "id")
+mod6_mapped <- merge(mapfile, mod6, by = "id")
+mod7_mapped <- merge(mapfile, mod7, by = "id")
+mod8_mapped <- merge(mapfile, mod8, by = "id")
+mod9_mapped <- merge(mapfile, mod9, by = "id")
+mod10_mapped <- merge(mapfile, mod10, by = "id")
+mod11_mapped <- merge(mapfile, mod11, by = "id")
+mod12_mapped <- merge(mapfile, mod12, by = "id")
+mod13_mapped <- merge(mapfile, mod13, by = "id")
+mod14_mapped <- merge(mapfile, mod14, by = "id")
+
+# Calculate the proportion of each disease in a module
+
+mod1_mapped <- mod1_mapped %>% group_by(disease) %>% mutate(prop = length(disease)/216 * 100)
+mod1_mapped$group <- "Module1"
+
+mod2_mapped <- mod2_mapped %>% group_by(disease) %>% mutate(prop = length(disease)/345 * 100)
+mod2_mapped$group <- "Module2"
+
+mod3_mapped <- mod3_mapped %>% group_by(disease) %>% mutate(prop = length(disease)/164 * 100)
+mod3_mapped$group <- "Module3"
+
+mod4_mapped <- mod4_mapped %>% group_by(disease) %>% mutate(prop = length(disease)/171 * 100)
+mod4_mapped$group <- "Module4"
+
+mod5_mapped <- mod5_mapped %>% group_by(disease) %>% mutate(prop = length(disease)/177 * 100)
+mod5_mapped$group <- "Module5"
+
+mod6_mapped <- mod6_mapped %>% group_by(disease) %>% mutate(prop = length(disease)/194 * 100)
+mod6_mapped$group <- "Module6"
+
+mod7_mapped <- mod7_mapped %>% group_by(disease) %>% mutate(prop = length(disease)/472 * 100)
+mod7_mapped$group <- "Module7"
+
+mod8_mapped <- mod8_mapped %>% group_by(disease) %>% mutate(prop = length(disease)/170 * 100)
+mod8_mapped$group <- "Module8"
+
+mod9_mapped <- mod9_mapped %>% group_by(disease) %>% mutate(prop = length(disease)/122 * 100)
+mod9_mapped$group <- "Module9"
+
+mod10_mapped <- mod10_mapped %>% group_by(disease) %>% mutate(prop = length(disease)/79 * 100)
+mod10_mapped$group <- "Module10"
+
+mod11_mapped <- mod11_mapped %>% group_by(disease) %>% mutate(prop = length(disease)/123 * 100)
+mod11_mapped$group <- "Module11"
+
+mod12_mapped <- mod12_mapped %>% group_by(disease) %>% mutate(prop = length(disease)/220 * 100)
+mod12_mapped$group <- "Module12"
+
+mod13_mapped <- mod13_mapped %>% group_by(disease) %>% mutate(prop = length(disease)/150 * 100)
+mod13_mapped$group <- "Module13"
+
+mod14_mapped <- mod14_mapped %>% group_by(disease) %>% mutate(prop = length(disease)/73 * 100)
+mod14_mapped$group <- "Module14"
+
+## Write the mapped data into file
+write.table(mod1_mapped, "../../data/cluster_heatmap/module1_p216_data.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+write.table(mod2_mapped, "../../data/cluster_heatmap/module2_p345_data.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+write.table(mod3_mapped, "../../data/cluster_heatmap/module3_p164_data.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+write.table(mod4_mapped, "../../data/cluster_heatmap/module4_p171_data.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+write.table(mod5_mapped, "../../data/cluster_heatmap/module5_p177_data.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+write.table(mod6_mapped, "../../data/cluster_heatmap/module6_p194_data.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+write.table(mod7_mapped, "../../data/cluster_heatmap/module7_p472_data.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+write.table(mod8_mapped, "../../data/cluster_heatmap/module8_p170_data.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+write.table(mod9_mapped, "../../data/cluster_heatmap/module9_p122_data.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+write.table(mod10_mapped, "../../data/cluster_heatmap/module10_p79_data.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+write.table(mod11_mapped, "../../data/cluster_heatmap/module11_p123_data.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+write.table(mod12_mapped, "../../data/cluster_heatmap/module12_p220_data.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+write.table(mod13_mapped, "../../data/cluster_heatmap/module13_p150_data.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+write.table(mod14_mapped, "../../data/cluster_heatmap/module14_p73_data.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+
+```

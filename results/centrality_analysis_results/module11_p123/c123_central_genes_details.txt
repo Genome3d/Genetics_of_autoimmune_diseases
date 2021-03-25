@@ -1,0 +1,10 @@
+id	name	disease
+161	AP2A2	sle
+1785	DNM2	shared
+2580	GAK	shared
+5286	PIK3C2A	crd
+5878	RAB5C	shared
+6869	TACR1	pso
+10092	ARPC5	sle
+10109	ARPC2	shared
+10552	ARPC1A	ssc

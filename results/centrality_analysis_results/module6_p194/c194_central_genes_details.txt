@@ -1,0 +1,7 @@
+id	name	disease
+775	CACNA1C	shared
+779	CACNA1S	shared
+815	CAMK2A	ulc
+2890	GRIA1	ms
+2903	GRIN2A	pso
+2904	GRIN2B	crd

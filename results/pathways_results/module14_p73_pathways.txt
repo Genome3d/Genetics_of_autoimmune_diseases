@@ -1,0 +1,17 @@
+Description	Subcategory	Majorcategory	term_id	query_size	intersection_size	p_value	intersection	source
+Butanoate metabolism	Carbohydrate metabolism	Metabolism	KEGG:00650	38	3	0.00177730434145435	OXCT1,BDH2,AACS	KEGG
+Ferroptosis	Cell growth and death	Cellular Processes	KEGG:04216	38	2	0.0475138770482898	GPX4,GSS	KEGG
+Glutathione metabolism	Metabolism of other amino acids	Metabolism	KEGG:00480	38	6	5.01402002055981e-06	GGT7,GPX1,GPX4,GSS,GSTA4,PRDX6	KEGG
+Glycosaminoglycan degradation	Glycan biosynthesis and metabolism	Metabolism	KEGG:00531	38	4	2.54355715922213e-05	HEXB,IDUA,NAGLU,SGSH	KEGG
+Glycosphingolipid biosynthesis - ganglio series	Glycan biosynthesis and metabolism	Metabolism	KEGG:00604	38	2	0.00876951142748301	B4GALNT1,HEXB	KEGG
+Glycosphingolipid biosynthesis - globo and isoglobo series	Glycan biosynthesis and metabolism	Metabolism	KEGG:00603	38	2	0.00876951142748301	FUT2,HEXB	KEGG
+Glycosphingolipid biosynthesis - lacto and neolacto series	Glycan biosynthesis and metabolism	Metabolism	KEGG:00601	38	2	0.0242379158050699	FUT2,B3GNT2	KEGG
+Lysosome	Transport and catabolism	Cellular Processes	KEGG:04142	38	6	0.000217568179931895	FUCA1,HEXB,IDUA,NAGLU,SGSH,SUMF1	KEGG
+Metabolic pathways	Global and overview maps	Metabolism	KEGG:01100	38	26	1.12094189532259e-09	FOLH1,FUT2,B4GALNT1,GGT7,GPX1,GPX4,GSS,GSTA4,HEXB,IDUA,NAGLU,OXCT1,SETMAR,SGSH,B4GALT5,PRDX6,B3GNT2,GALNT6,AADAT,CSAD,KYAT3,BDH2,C1GALT1,AACS,ADO,GALNT18	KEGG
+Mucin type O-glycan biosynthesis	Glycan biosynthesis and metabolism	Metabolism	KEGG:00512	38	4	0.000151482167395115	B4GALT5,GALNT6,C1GALT1,GALNT18	KEGG
+Other glycan degradation	Glycan biosynthesis and metabolism	Metabolism	KEGG:00511	38	2	0.011689541794541	FUCA1,HEXB	KEGG
+Other types of O-glycan biosynthesis	Glycan biosynthesis and metabolism	Metabolism	KEGG:00514	38	3	0.00661125367630228	GALNT6,C1GALT1,GALNT18	KEGG
+Selenocompound metabolism	Metabolism of other amino acids	Metabolism	KEGG:00450	38	3	0.000361221417668781	TXNRD1,TXNRD2,KYAT3	KEGG
+Synthesis and degradation of ketone bodies	Lipid metabolism	Metabolism	KEGG:00072	38	2	0.00508715314568339	OXCT1,BDH2	KEGG
+Taurine and hypotaurine metabolism	Metabolism of other amino acids	Metabolism	KEGG:00430	38	3	0.000151482167395115	GGT7,CSAD,ADO	KEGG
+Tryptophan metabolism	Amino acid metabolism	Metabolism	KEGG:00380	38	2	0.0475138770482898	AADAT,KYAT3	KEGG

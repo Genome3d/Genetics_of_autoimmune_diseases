@@ -1,0 +1,5 @@
+id	gene	disease	snp_disease	DC	CC	EC
+2262	GPC5	ra	ra	0.141	0.244	0.412
+9653	HS2ST1	ced	ced	0.09	0.216	0.295
+9672	SDC3	ra	ra	0.141	0.244	0.412
+10082	GPC6	pso	pso	0.141	0.244	0.412

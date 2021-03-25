@@ -1,0 +1,6 @@
+id	name	disease
+50	ACO2	shared
+498	ATP5A1	as
+1738	DLD	ulc
+4705	NDUFA10	shared
+5162	PDHB	shared

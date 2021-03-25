@@ -1,0 +1,14 @@
+id	gene	disease	snp_disease	DC	CC	EC
+6500	SKP1	ms	ms	0.477	0.582	0.136
+6921	ELOC	pbc	pbc	0.43	0.558	0.135
+7311	UBA52	sle	sle	0.617	0.677	0.136
+8454	CUL1	crd	crd	0.463	0.578	0.136
+9817	KEAP1	shared	ms,pso	0.443	0.562	0.135
+26190	FBXW2	shared	as,crd,ra,sle,ulc	0.436	0.56	0.135
+26259	FBXW8	shared	alo,pso	0.43	0.558	0.135
+26270	FBXO6	alo	alo	0.436	0.56	0.135
+114907	FBXO32	vit	vit	0.436	0.56	0.135
+115290	FBXO17	pso	pso	0.436	0.56	0.135
+140461	ASB8	ra	ra	0.436	0.56	0.135
+200845	KCTD6	sle	sle	0.43	0.56	0.135
+222235	FBXL13	crd	crd	0.43	0.558	0.135

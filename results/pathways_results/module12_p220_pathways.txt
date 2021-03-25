@@ -1,0 +1,27 @@
+Description	Subcategory	Majorcategory	term_id	query_size	intersection_size	p_value	intersection	source
+Alzheimer disease	Neurodegenerative disease	Human Diseases	KEGG:05010	90	18	3.18017344075394e-06	CSNK1A1,GSK3B,LRP6,LRP5,PSMA1,PSMA5,PSMA6,PSMB7,PSMC3,PSMD3,PSMD4,TNF,WNT3,FZD3,AXIN1,FZD6,DKK2,WNT4	KEGG
+Amyotrophic lateral sclerosis	Neurodegenerative disease	Human Diseases	KEGG:05014	90	11	0.0201324035711061	DNAH9,PSMA1,PSMA5,PSMA6,PSMB7,PSMC3,PSMD3,PSMD4,TNF,DNAH11,NUP85	KEGG
+Basal cell carcinoma	Cancer: specific types	Human Diseases	KEGG:05217	90	9	1.05053423360661e-06	GLI1,GLI3,GSK3B,WNT3,FZD3,AXIN1,FZD6,SUFU,WNT4	KEGG
+Breast cancer	Cancer: specific types	Human Diseases	KEGG:05224	90	9	0.000660174935465161	CSNK1A1,GSK3B,LRP6,LRP5,WNT3,FZD3,AXIN1,FZD6,WNT4	KEGG
+Cell cycle	Cell growth and death	Cellular Processes	KEGG:04110	90	14	5.70513609081292e-09	BUB1B,CDC25A,CDC25B,GSK3B,MCM6,ORC4,RAD21,MAD1L1,CDC14A,PTTG1,STAG1,STAG2,ORC3,CCNB3	KEGG
+Cushing syndrome	Endocrine and metabolic disease	Human Diseases	KEGG:04934	90	6	0.0444707307400424	GSK3B,WNT3,FZD3,AXIN1,FZD6,WNT4	KEGG
+DNA replication	Replication and repair	Genetic Information Processing	KEGG:03030	90	3	0.0444707307400424	MCM6,PRIM2,POLA2	KEGG
+Gastric cancer	Cancer: specific types	Human Diseases	KEGG:05226	90	9	0.000660174935465161	CSNK1A1,GSK3B,LRP6,LRP5,WNT3,FZD3,AXIN1,FZD6,WNT4	KEGG
+Hedgehog signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04340	90	6	0.000391682577959205	CSNK1A1,EVC,GLI1,GLI3,GSK3B,SUFU	KEGG
+Hepatocellular carcinoma	Cancer: specific types	Human Diseases	KEGG:05225	90	9	0.00103805561022185	CSNK1A1,GSK3B,LRP6,LRP5,WNT3,FZD3,AXIN1,FZD6,WNT4	KEGG
+Hippo signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04390	90	9	0.000858047092640946	BIRC5,GSK3B,PPP2CA,WNT3,FZD3,AXIN1,FZD6,LIMD1,WNT4	KEGG
+Human papillomavirus infection	Infectious disease: viral	Human Diseases	KEGG:05165	90	13	0.000891451246999796	CSNK1A1,GSK3B,PPP2CA,PPP2R5C,TNF,TRAF3,WNT3,FZD3,AXIN1,FZD6,TUBG2,WNT4,PPP2R3C	KEGG
+Human T-cell leukemia virus 1 infection	Infectious disease: viral	Human Diseases	KEGG:05166	90	8	0.0227370745674398	BUB1B,LTA,LTBR,TNF,MAD1L1,MAP3K14,PTTG1,TNFRSF13C	KEGG
+Huntington disease	Neurodegenerative disease	Human Diseases	KEGG:05016	90	10	0.0195228115907155	DNAH9,PSMA1,PSMA5,PSMA6,PSMB7,PSMC3,PSMD3,PSMD4,DNAH11,IFT57	KEGG
+IL-17 signaling pathway	Immune system	Organismal Systems	KEGG:04657	90	6	0.00561233034371099	GSK3B,HSP90AA1,TNF,TRAF3,TRAF3IP2,IL17RA	KEGG
+Melanogenesis	Endocrine system	Organismal Systems	KEGG:04916	90	5	0.0353935663331187	GSK3B,WNT3,FZD3,FZD6,WNT4	KEGG
+mTOR signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04150	90	9	0.000811875656921533	GSK3B,LRP6,LRP5,CLIP1,TNF,WNT3,FZD3,FZD6,WNT4	KEGG
+NF-kappa B signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04064	90	8	0.000391682577959205	LTA,LTBR,TNF,TRAF1,TRAF3,MAP3K14,EDA2R,TNFRSF13C	KEGG
+Pathways in cancer	Cancer: overview	Human Diseases	KEGG:05200	90	17	0.000889234369875659	BIRC5,GLI1,GLI3,GSK3B,HIF1A,HSP90AA1,LRP6,LRP5,TRAF1,TRAF3,WNT3,FZD3,AXIN1,FZD6,SUFU,WNT4,EGLN3	KEGG
+Prion disease	Neurodegenerative disease	Human Diseases	KEGG:05020	90	9	0.0260541817974447	GSK3B,PSMA1,PSMA5,PSMA6,PSMB7,PSMC3,PSMD3,PSMD4,TNF	KEGG
+Progesterone-mediated oocyte maturation	Endocrine system	Organismal Systems	KEGG:04914	90	5	0.0326684324349683	CDC25A,CDC25B,HSP90AA1,MAD1L1,CCNB3	KEGG
+Proteasome	Folding, sorting and degradation	Genetic Information Processing	KEGG:03050	90	9	7.62595063065384e-08	PSMA1,PSMA5,PSMA6,PSMB7,PSMB9,PSMB10,PSMC3,PSMD3,PSMD4	KEGG
+Signaling pathways regulating pluripotency of stem cells	Cellular community - eukaryotes	Cellular Processes	KEGG:04550	90	6	0.0353935663331187	GSK3B,WNT3,FZD3,AXIN1,FZD6,WNT4	KEGG
+Spinocerebellar ataxia	Neurodegenerative disease	Human Diseases	KEGG:05017	90	7	0.00982074568331803	PSMA1,PSMA5,PSMA6,PSMB7,PSMC3,PSMD3,PSMD4	KEGG
+TNF signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04668	90	5	0.0481478864355641	LTA,TNF,TRAF1,TRAF3,MAP3K14	KEGG
+Wnt signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04310	90	20	7.7422016356182e-14	CSNK1A1,GSK3B,LRP6,LRP5,SFRP4,WNT3,FZD3,AXIN1,FZD6,LGR5,WIF1,DAAM1,DKK2,WNT4,LGR4,VANGL2,LGR6,ZNRF3,PRICKLE1,PRICKLE2	KEGG

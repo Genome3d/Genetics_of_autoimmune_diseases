@@ -1,0 +1,176 @@
+---
+title: "Autoimmune_diseases_analyses"
+author: "Sreemol Gokuladhas"
+date: "25/03/2021"
+output: html_document
+---
+
+```{r}
+
+## The required data for the analysis is available either in ../data or ../results directory
+
+## To find the pleiotropic (shared between two or more diseases) and non-pleiotropic (unique to one disease) regulatory SNPs between 18 autoimmune diseases (AiDs)
+
+## Run CoDeS3D pipeline available at https://github.com/Genome3d/codes3d-v2
+
+## Set working directory 
+
+setwd("/Genetics_of_autoimmune_diseases/scripts/R")
+
+## Load 'significant_eqtls.txt' files obtained from CoDeS3D
+
+alo <- read.delim("../../results/codes3d_results/alopecia_allhic/significant_eqtls.txt", header = T, sep = "\t")
+as <- read.delim("../../results/codes3d_results/ankylosing_spondylitis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+ced <- read.delim("../../results/codes3d_results/celiac_disease_allhic/significant_eqtls.txt", header = T, sep = "\t")
+crd <- read.delim("../../results/codes3d_results/crohns_disease_allhic/significant_eqtls.txt", header = T, sep = "\t")
+ee <- read.delim("../../results/codes3d_results/eosinophilic_esophagitis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+jia <- read.delim("../../results/codes3d_results/juvenile_idiopathic_arthritis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+grd <- read.delim("../../results/codes3d_results/graves_disease_allhic/significant_eqtls.txt", header = T, sep = "\t")
+ms <- read.delim("../../results/codes3d_results/multiple_sclerosis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+pbc <- read.delim("../../results/codes3d_results/primary_biliary_cirrhosis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+pso <- read.delim("../../results/codes3d_results/psoriasis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+pa <- read.delim("../../results/codes3d_results/psoriatic_arthritis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+ra <- read.delim("../../results/codes3d_results/rheumatoid_arthritis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+sjs <- read.delim("../../results/codes3d_results/sjögrens_syndrome_allhic/significant_eqtls.txt", header = T, sep = "\t")
+sle <- read.delim("../../results/codes3d_results/systemic_lupus_erythematosus_allhic/significant_eqtls.txt", header = T, sep = "\t")
+ssc <- read.delim("../../results/codes3d_results/systemic_scleroderma_allhic/significant_eqtls.txt", header = T, sep = "\t")
+t1d <- read.delim("../../results/codes3d_results/type_I_diabetes_allhic/significant_eqtls.txt", header = T, sep = "\t")
+ulc <- read.delim("../../results/codes3d_results/ulcerative_colitis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+vit <- read.delim("../../results/codes3d_results/vitiligo_allhic/significant_eqtls.txt", header = T, sep = "\t")
+
+## Create a dataframe only with snp column from 18 AiD results
+
+alo_snps <- data.table(unique(alo$snp))
+alo_snps$disease <- "alo"
+as_snps <- data.table(unique(as$snp))
+as_snps$disease <- "as"
+ced_snps <- data.table(unique(ced$snp))
+ced_snps$disease <- "ced"
+crd_snps <- data.table(unique(crd$snp))
+crd_snps$disease <- "crd"
+ee_snps <- data.table(unique(ee$snp))
+ee_snps$disease <- "ee"
+grd_snps <- data.table(unique(grd$snp))
+grd_snps$disease <- "grd"
+jia_snps <- data.table(unique(jia$snp))
+jia_snps$disease <- "jia"
+ms_snps <- data.table(unique(ms$snp))
+ms_snps$disease <- "ms"
+pa_snps <- data.table(unique(pa$snp))
+pa_snps$disease <- "pa"
+pbc_snps <- data.table(unique(pbc$snp))
+pbc_snps$disease <- "pbc"
+pso_snps <- data.table(unique(pso$snp))
+pso_snps$disease <- "pso"
+ra_snps <- data.table(unique(ra$snp))
+ra_snps$disease <- "ra"
+sjs_snps <- data.table(unique(sjs$snp))
+sjs_snps$disease <- "sjs"
+sle_snps <- data.table(unique(sle$snp))
+sle_snps$disease <- "sle"
+ssc_snps <- data.table(unique(ssc$snp))
+ssc_snps$disease <- "ssc"
+t1d_snps <- data.table(unique(t1d$snp))
+t1d_snps$disease <- "t1d"
+ulc_snps <- data.table(unique(ulc$snp))
+ulc_snps$disease <- "ulc"
+vit_snps <- data.table(unique(vit$snp))
+vit_snps$disease <- "vit"
+
+## Combine all the dataframes into one 
+
+all_snps <- unique(rbind(alo_snps, as_snps, ced_snps, crd_snps, ee_snps, grd_snps, jia_snps, ms_snps, pa_snps, 
+                   pbc_snps, pso_snps, ra_snps, sjs_snps, sle_snps, ssc_snps, t1d_snps, ulc_snps, vit_snps))
+colnames(all_snps) <- c("snp", "disease")
+
+## To find the shared and unique snps across AiDs
+
+aggr_disease <- aggregate(disease~snp, all_snps, function(x) paste(sort(unique(x)), collapse=","))
+aggr_disease_len <- aggregate(disease~snp, all_snps, function(x) length(unique(x)))
+shared_and_unique_snps <- merge(aggr_disease, aggr_disease_len, by = "snp")
+names(shared_and_unique_snps) <- c("snp", "disease", "len_of_disease")
+
+## Shared or pleiotropic snps
+
+only_shared_snps <- shared_and_unique_snps[shared_and_unique_snps$len_of_disease > 1,]
+only_shared_snp <- data.table("snp" = only_shared_snps$snp)
+
+
+## Unique or non-pleiotropic snps
+
+only_unique_snps <- shared_and_unique_snps[shared_and_unique_snps$len_of_disease == 1,]
+only_unique_snp <- data.table("snp" = only_unique_snps$snp)
+
+## To identify identical, shared and disease-specific genes across AiDs
+
+alo_snp_gene_disease <- unique(subset(alo, select = c("snp","gene")))
+alo_snp_gene_disease$disease <- "alo"
+as_snp_gene_disease <- unique(subset(as, select = c("snp","gene")))
+as_snp_gene_disease$disease <- "as"
+ced_snp_gene_disease <- unique(subset(ced, select = c("snp","gene")))
+ced_snp_gene_disease$disease <- "ced"
+crd_snp_gene_disease <- unique(subset(crd, select = c("snp","gene")))
+crd_snp_gene_disease$disease <- "crd"
+ee_snp_gene_disease <- unique(subset(ee, select = c("snp","gene")))
+ee_snp_gene_disease$disease <- "ee"
+jia_snp_gene_disease <- unique(subset(jia, select = c("snp","gene")))
+jia_snp_gene_disease$disease <- "jia"
+grd_snp_gene_disease <- unique(subset(grd, select = c("snp","gene")))
+grd_snp_gene_disease$disease <- "grd"
+ms_snp_gene_disease <- unique(subset(ms, select = c("snp","gene")))
+ms_snp_gene_disease$disease <- "ms"
+pbc_snp_gene_disease <- unique(subset(pbc, select = c("snp","gene")))
+pbc_snp_gene_disease$disease <- "pbc"
+pso_snp_gene_disease <- unique(subset(pso, select = c("snp","gene")))
+pso_snp_gene_disease$disease <- "pso"
+pa_snp_gene_disease <- unique(subset(pa, select = c("snp","gene")))
+pa_snp_gene_disease$disease <- "pa"
+ra_snp_gene_disease <- unique(subset(ra, select = c("snp","gene")))
+ra_snp_gene_disease$disease <- "ra"
+sjs_snp_gene_disease <- unique(subset(sjs, select = c("snp","gene")))
+sjs_snp_gene_disease$disease <- "sjs"
+sle_snp_gene_disease <- unique(subset(sle, select = c("snp","gene")))
+sle_snp_gene_disease$disease <- "sle"
+ssc_snp_gene_disease <- unique(subset(ssc, select = c("snp","gene")))
+ssc_snp_gene_disease$disease <- "ssc"
+t1d_snp_gene_disease <- unique(subset(t1d, select = c("snp","gene")))
+t1d_snp_gene_disease$disease <- "t1d"
+ulc_snp_gene_disease <- unique(subset(ulc, select = c("snp","gene")))
+ulc_snp_gene_disease$disease <- "ulc"
+vit_snp_gene_disease <- unique(subset(vit, select = c("snp","gene")))
+vit_snp_gene_disease$disease <- "vit"
+
+## Row bind all the dataframes into single dataframe
+
+all_disease <- rbind(alo_snp_gene_disease, as_snp_gene_disease, ced_snp_gene_disease, crd_snp_gene_disease,
+                     ee_snp_gene_disease, jia_snp_gene_disease, grd_snp_gene_disease, ms_snp_gene_disease,
+                     pbc_snp_gene_disease, pso_snp_gene_disease, pa_snp_gene_disease, ra_snp_gene_disease,
+                     sjs_snp_gene_disease, sle_snp_gene_disease, ssc_snp_gene_disease, t1d_snp_gene_disease,
+                     ulc_snp_gene_disease, vit_snp_gene_disease)
+
+## To find the total number of genes regulated by pleiotropic snps
+
+genes_by_shared_snps <- merge(only_shared_snp, all_disease, by = "snp")
+print(length(unique(genes_by_shared_snps$gene))) 
+print(length(unique(genes_by_shared_snps$snp))) 
+
+## To find the total number of genes regulated by non-pleiotropic snps
+
+genes_by_unique_snps <- merge(only_unique_snp, all_disease, by = "snp")
+print(length(unique(genes_by_unique_snps$gene))) 
+print(length(unique(genes_by_unique_snps$snp)))
+
+## To find the number of genes (i.e., identical) regulated only by the pleiotropic snps
+
+genes_only_by_shared_snps <- data.table(setdiff(genes_by_shared_snps$gene, genes_by_unique_snps$gene)) 
+
+## To find the number of genes (i.e., shared) regulated by both pleiotropic and non-pleiotropic snps
+
+genes_by_unique_and_shared_snps <- data.table(intersect(genes_by_shared_snps$gene, genes_by_unique_snps$gene))  
+
+## To find the number of genes (i.e., unique) regulated only by non-pleiotropic snps
+
+genes_only_by_unique_snps <- data.table(setdiff(genes_by_unique_snps$gene, genes_by_shared_snps$gene))
+
+```
+

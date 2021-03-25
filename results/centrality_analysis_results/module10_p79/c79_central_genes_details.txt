@@ -1,0 +1,5 @@
+id	name	disease
+2262	GPC5	ra
+9653	HS2ST1	ced
+9672	SDC3	ra
+10082	GPC6	pso

@@ -1,0 +1,755 @@
+---
+title: "pathway_enrichment_analysis"
+author: "Sreemol Gokuladhas"
+date: "25/03/2021"
+output: html_document
+---
+
+```{r}
+
+## Set working directory 
+
+setwd("/Genetics_of_autoimmune_diseases/scripts/R")
+
+## A file with ENTREZ gene ID and corresponding gene symbol
+
+map_id_to_symbol <- read.delim("../../data/map_file_short.txt", header = T, sep = "\t")
+map_symbol_subset <- unique(subset(map_id_to_symbol, select = c("name", "id")))
+
+## A file with KEGG pathways and their sub and major-categories
+
+map_pathway_file <- read.delim("../../data/kegg_pathway_map_10Mar2020_with_abbreviation.txt", header = T, sep = "\t")
+colnames(map_pathway_file) <- c("Description", "Subcategory", "Majorcategory")
+```
+
+```{r}
+##### Module1 pathway enrichment analysis #####
+
+## Load input data [i.e., Corresponding entrez IDs of all genes present in the module]
+
+cluster216 <- read.delim("../../data/cluster_ids/module1_p216_ids.txt", header = F)
+names(cluster216) = "id"
+
+## get gene names corresponding to the ID
+
+cluster216_symbol <- merge(map_symbol_subset, cluster216, by = "id")
+#cluster216_symboln <- unique(cluster216_symbol$name) # <<- (ran once) to confirm if the list has unique genes
+
+library(gprofiler2)
+go_cluster216 <- gost(query = unique(cluster216_symbol$name),
+                               numeric_ns = "ENTREZGENE_ACC",
+                               organism = "hsapiens",
+                               ordered_query = F,
+                               significant = T,
+                               measure_underrepresentation = F,
+                               evcodes = T,
+                               user_threshold = 0.05,
+                               correction_method = "fdr",
+                               domain_scope = "annotated")
+
+## put GO results into a dataframe
+
+go_cluster216_df <- head(go_cluster216$result, 100000)
+
+## Subset only required columns 
+
+go_cluster216_df_subset <- go_cluster216_df[,c("term_id", "term_name", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")]
+
+## Subset only KEGG pathway results
+
+go_cluster216_KEGGpathways <- go_cluster216_df_subset[grep('KEGG', go_cluster216_df_subset$source), ]
+
+## rename 'term_name' column name into 'Description' to merge with pathway category file
+
+colnames(go_cluster216_KEGGpathways) <- c("term_id", "Description", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")
+
+## Merge GO results dataframe with KEGG pathway category map file
+
+go_cluster216_KEGGpathways_category <- merge(map_pathway_file, go_cluster216_KEGGpathways, by = "Description")
+
+## Write the pathway enrichment results to a file  
+
+write.table(go_cluster216_KEGGpathways_category, "../../results/pathways_results/module1_p216_pathways.txt", sep = "\t", row.names = FALSE, col.names = T, quote= FALSE)
+```
+
+```{r}
+##### Module2 pathway enrichment analysis #####
+
+## Load input data [i.e., Corresponding entrez IDs of all genes present in the module]
+
+cluster345 <- read.delim("../../data/cluster_ids/module2_p345_ids.txt", header = F)
+names(cluster345) = "id"
+
+##get gene names corresponding to the ID
+
+cluster345_symbol <- merge(map_symbol_subset, cluster345, by = "id")
+#cluster345_symboln <- unique(cluster345_symbol$name) # <<- (run once) to confirm if the list has unique genes
+
+library(gprofiler2)
+go_cluster345 <- gost(query = unique(cluster345_symbol$name),
+                               numeric_ns = "ENTREZGENE_ACC",
+                               organism = "hsapiens",
+                               ordered_query = F,
+                               significant = T,
+                               measure_underrepresentation = F,
+                               evcodes = T,
+                               user_threshold = 0.05,
+                               correction_method = "fdr",
+                               domain_scope = "annotated")
+
+## put GO results into a dataframe
+
+go_cluster345_df <- head(go_cluster345$result, 100000)
+
+## Subset only required columns 
+
+go_cluster345_df_subset <- go_cluster345_df[,c("term_id", "term_name", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")]
+
+## Subset only KEGG pathway results
+
+go_cluster345_KEGGpathways <- go_cluster345_df_subset[grep('KEGG', go_cluster345_df_subset$source), ]
+
+## rename 'term_name' column name into 'Description' to merge with pathway category file
+
+colnames(go_cluster345_KEGGpathways) <- c("term_id", "Description", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")
+
+## Merge GO results dataframe with KEGG pathway category map file
+
+go_cluster345_KEGGpathways_category <- merge(map_pathway_file, go_cluster345_KEGGpathways, by = "Description")
+
+## Write the pathway enrichment results to a file  
+
+write.table(go_cluster345_KEGGpathways_category, file = "../../results/pathways_results/module2_p345_pathways.txt", sep = "\t", row.names = FALSE, col.names = T, quote= FALSE)
+```
+
+```{r}
+##### Module3 pathway enrichment analysis #####
+
+## Load input data [i.e., Corresponding entrez IDs of all genes present in the module]
+
+cluster164 <- read.delim("../../data/cluster_ids/module3_p164_ids.txt", header = F)
+names(cluster164) = "id"
+
+##get gene names corresponding to the ID
+
+cluster164_symbol <- merge(map_symbol_subset, cluster164, by = "id")
+#cluster164_symboln <- unique(cluster164_symbol$name) # <<- (run once) to confirm if the list has unique genes
+
+library(gprofiler2)
+go_cluster164 <- gost(query = unique(cluster164_symbol$name),
+                               numeric_ns = "ENTREZGENE_ACC",
+                               organism = "hsapiens",
+                               ordered_query = F,
+                               significant = T,
+                               measure_underrepresentation = F,
+                               evcodes = T,
+                               user_threshold = 0.05,
+                               correction_method = "fdr",
+                               domain_scope = "annotated")
+
+## put GO results into a dataframe
+
+go_cluster164_df <- head(go_cluster164$result, 100000)
+
+## Subset only required columns 
+
+go_cluster164_df_subset <- go_cluster164_df[,c("term_id", "term_name", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")]
+
+## Subset only KEGG pathway results
+
+go_cluster164_KEGGpathways <- go_cluster164_df_subset[grep('KEGG', go_cluster164_df_subset$source), ]
+
+## rename 'term_name' column name into 'Description' to merge with pathway category file
+
+colnames(go_cluster164_KEGGpathways) <- c("term_id", "Description", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")
+
+## Merge GO results dataframe with KEGG pathway category map file
+
+go_cluster164_KEGGpathways_category <- merge(map_pathway_file, go_cluster164_KEGGpathways, by = "Description")
+
+## Write the pathway enrichment results to a file  
+
+write.table(go_cluster164_KEGGpathways_category, file = "../../results/pathways_results/module3_p164_pathways.txt", sep = "\t", row.names = FALSE, col.names = T, quote= FALSE)
+
+```
+
+```{r}
+##### Module4 pathway enrichment analysis #####
+
+## Load input data [i.e., Corresponding entrez IDs of all genes present in the module]
+
+cluster171 <- read.delim("../../data/cluster_ids/module4_p171_ids.txt", header = F)
+names(cluster171) = "id"
+
+##get gene names corresponding to the ID
+
+cluster171_symbol <- merge(map_symbol_subset, cluster171, by = "id")
+#cluster171_symboln <- unique(cluster171_symbol$name) # <<- (run once) to confirm if the list has unique genes
+
+library(gprofiler2)
+go_cluster171 <- gost(query = unique(cluster171_symbol$name),
+                               numeric_ns = "ENTREZGENE_ACC",
+                               organism = "hsapiens",
+                               ordered_query = F,
+                               significant = T,
+                               measure_underrepresentation = F,
+                               evcodes = T,
+                               user_threshold = 0.05,
+                               correction_method = "fdr",
+                               domain_scope = "annotated")
+
+## put GO results into a dataframe
+
+go_cluster171_df <- head(go_cluster171$result, 100000)
+
+## Subset only required columns 
+
+go_cluster171_df_subset <- go_cluster171_df[,c("term_id", "term_name", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")]
+
+## Subset only KEGG pathway results
+
+go_cluster171_KEGGpathways <- go_cluster171_df_subset[grep('KEGG', go_cluster171_df_subset$source), ]
+
+## rename 'term_name' column name into 'Description' to merge with pathway category file
+
+colnames(go_cluster171_KEGGpathways) <- c("term_id", "Description", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")
+
+## Merge GO results dataframe with KEGG pathway category map file
+
+go_cluster171_KEGGpathways_category <- merge(map_pathway_file, go_cluster171_KEGGpathways, by = "Description")
+
+## Write the pathway enrichment results to a file  
+
+write.table(go_cluster171_KEGGpathways_category, file = "../../results/pathways_results/module4_p171_pathways.txt", sep = "\t", row.names = FALSE, col.names = T, quote= FALSE)
+```
+
+```{r}
+##### Module5 pathway enrichment analysis #####
+
+## Load input data [i.e., Corresponding entrez IDs of all genes present in the module]
+
+cluster177 <- read.delim("../../data/cluster_ids/module5_p177_ids.txt", header = F)
+names(cluster177) = "id"
+
+##get gene names corresponding to the ID
+
+cluster177_symbol <- merge(map_symbol_subset, cluster177, by = "id")
+#cluster177_symboln <- unique(cluster177_symbol$name) # <<- (run once) to confirm if the list has unique genes
+
+library(gprofiler2)
+go_cluster177 <- gost(query = unique(cluster177_symbol$name),
+                               numeric_ns = "ENTREZGENE_ACC",
+                               organism = "hsapiens",
+                               ordered_query = F,
+                               significant = T,
+                               measure_underrepresentation = F,
+                               evcodes = T,
+                               user_threshold = 0.05,
+                               correction_method = "fdr",
+                               domain_scope = "annotated")
+
+## put GO results into a dataframe
+
+go_cluster177_df <- head(go_cluster177$result, 100000)
+
+## Subset only required columns 
+
+go_cluster177_df_subset <- go_cluster177_df[,c("term_id", "term_name", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")]
+
+## Subset only KEGG pathway results
+
+go_cluster177_KEGGpathways <- go_cluster177_df_subset[grep('KEGG', go_cluster177_df_subset$source), ]
+
+## rename 'term_name' column name into 'Description' to merge with pathway category file
+
+colnames(go_cluster177_KEGGpathways) <- c("term_id", "Description", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")
+
+## Merge GO results dataframe with KEGG pathway category map file
+
+go_cluster177_KEGGpathways_category <- merge(map_pathway_file, go_cluster177_KEGGpathways, by = "Description")
+
+## Write the pathway enrichment results to a file  
+
+write.table(go_cluster177_KEGGpathways_category, file = "../../results/pathways_results/module5_p177_pathways.txt", sep = "\t", row.names = FALSE, col.names = T, quote= FALSE)
+```
+
+```{r}
+##### Module6 pathway enrichment analysis #####
+
+## Load input data [i.e., Corresponding entrez IDs of all genes present in the module]
+
+cluster194 <- read.delim("../../data/cluster_ids/module6_p194_ids.txt", header = F)
+names(cluster194) = "id"
+
+##get gene names corresponding to the ID
+
+cluster194_symbol <- merge(map_symbol_subset, cluster194, by = "id")
+#cluster194_symboln <- unique(cluster194_symbol$name) # <<- (run once) to confirm if the list has unique genes
+
+library(gprofiler2)
+go_cluster194 <- gost(query = unique(cluster194_symbol$name),
+                               numeric_ns = "ENTREZGENE_ACC",
+                               organism = "hsapiens",
+                               ordered_query = F,
+                               significant = T,
+                               measure_underrepresentation = F,
+                               evcodes = T,
+                               user_threshold = 0.05,
+                               correction_method = "fdr",
+                               domain_scope = "annotated")
+
+## put GO results into a dataframe
+
+go_cluster194_df <- head(go_cluster194$result, 100000)
+
+## Subset only required columns 
+
+go_cluster194_df_subset <- go_cluster194_df[,c("term_id", "term_name", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")]
+
+## Subset only KEGG pathway results
+
+go_cluster194_KEGGpathways <- go_cluster194_df_subset[grep('KEGG', go_cluster194_df_subset$source), ]
+
+## rename 'term_name' column name into 'Description' to merge with pathway category file
+
+colnames(go_cluster194_KEGGpathways) <- c("term_id", "Description", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")
+
+## Merge GO results dataframe with KEGG pathway category map file
+
+go_cluster194_KEGGpathways_category <- merge(map_pathway_file, go_cluster194_KEGGpathways, by = "Description")
+
+## Write the pathway enrichment results to a file  
+
+write.table(go_cluster194_KEGGpathways_category, file = "../../results/pathways_results/module6_p194_pathways.txt", sep = "\t", row.names = FALSE, col.names = T, quote= FALSE)
+```
+
+```{r}
+##### Module7 pathway enrichment analysis #####
+
+## Load input data [i.e., Corresponding entrez IDs of all genes present in the module]
+
+cluster472 <- read.delim("../../data/cluster_ids/module7_p472_ids.txt", header = F)
+names(cluster472) = "id"
+
+##get gene names corresponding to the ID
+
+cluster472_symbol <- merge(map_symbol_subset, cluster472, by = "id")
+#cluster472_symboln <- unique(cluster472_symbol$name) # <<- (run once) to confirm if the list has unique genes
+
+library(gprofiler2)
+go_cluster472 <- gost(query = unique(cluster472_symbol$name),
+                               numeric_ns = "ENTREZGENE_ACC",
+                               organism = "hsapiens",
+                               ordered_query = F,
+                               significant = T,
+                               measure_underrepresentation = F,
+                               evcodes = T,
+                               user_threshold = 0.05,
+                               correction_method = "fdr",
+                               domain_scope = "annotated")
+
+## put GO results into a dataframe
+
+go_cluster472_df <- head(go_cluster472$result, 100000)
+
+## Subset only required columns 
+
+go_cluster472_df_subset <- go_cluster472_df[,c("term_id", "term_name", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")]
+
+## Subset only KEGG pathway results
+
+go_cluster472_KEGGpathways <- go_cluster472_df_subset[grep('KEGG', go_cluster472_df_subset$source), ]
+
+## rename 'term_name' column name into 'Description' to merge with pathway category file
+
+colnames(go_cluster472_KEGGpathways) <- c("term_id", "Description", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")
+
+## Merge GO results dataframe with KEGG pathway category map file
+
+go_cluster472_KEGGpathways_category <- merge(map_pathway_file, go_cluster472_KEGGpathways, by = "Description")
+
+
+## Write the pathway enrichment results to a file  
+
+write.table(go_cluster472_KEGGpathways_category, file = "../../results/pathways_results/module7_p472_pathways.txt", sep = "\t", row.names = FALSE, col.names = T, quote= FALSE)
+```
+
+```{r}
+##### Module8 pathway enrichment analysis #####
+
+## Load input data [i.e., Corresponding entrez IDs of all genes present in the module]
+
+cluster170 <- read.delim("../../data/cluster_ids/module8_p170_ids.txt", header = F)
+names(cluster170) = "id"
+
+##get gene names corresponding to the ID
+
+cluster170_symbol <- merge(map_symbol_subset, cluster170, by = "id")
+#cluster170_symboln <- unique(cluster170_symbol$name) # <<- (run once) to confirm if the list has unique genes
+
+library(gprofiler2)
+go_cluster170 <- gost(query = unique(cluster170_symbol$name),
+                               numeric_ns = "ENTREZGENE_ACC",
+                               organism = "hsapiens",
+                               ordered_query = F,
+                               significant = T,
+                               measure_underrepresentation = F,
+                               evcodes = T,
+                               user_threshold = 0.05,
+                               correction_method = "fdr",
+                               domain_scope = "annotated")
+
+## put GO results into a dataframe
+
+go_cluster170_df <- head(go_cluster170$result, 100000)
+
+## Subset only required columns 
+
+go_cluster170_df_subset <- go_cluster170_df[,c("term_id", "term_name", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")]
+
+## Subset only KEGG pathway results
+
+go_cluster170_KEGGpathways <- go_cluster170_df_subset[grep('KEGG', go_cluster170_df_subset$source), ]
+
+## rename 'term_name' column name into 'Description' to merge with pathway category file
+
+colnames(go_cluster170_KEGGpathways) <- c("term_id", "Description", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")
+
+## Merge GO results dataframe with KEGG pathway category map file
+
+go_cluster170_KEGGpathways_category <- merge(map_pathway_file, go_cluster170_KEGGpathways, by = "Description")
+
+## Write the pathway enrichment results to a file  
+
+write.table(go_cluster170_KEGGpathways_category, file = "../../results/pathways_results/module8_p170_pathways.txt", sep = "\t", row.names = FALSE, col.names = T, quote= FALSE)
+```
+
+```{r}
+##### Module9 pathway enrichment analysis #####
+
+## Load input data [i.e., Corresponding entrez IDs of all genes present in the module]
+
+cluster122 <- read.delim("../../data/cluster_ids/module9_p122_ids.txt", header = F)
+names(cluster122) = "id"
+
+##get gene names corresponding to the ID
+
+cluster122_symbol <- merge(map_symbol_subset, cluster122, by = "id")
+#cluster122_symboln <- unique(cluster122_symbol$name) # <<- (run once) to confirm if the list has unique genes
+
+library(gprofiler2)
+go_cluster122 <- gost(query = unique(cluster122_symbol$name),
+                               numeric_ns = "ENTREZGENE_ACC",
+                               organism = "hsapiens",
+                               ordered_query = F,
+                               significant = T,
+                               measure_underrepresentation = F,
+                               evcodes = T,
+                               user_threshold = 0.05,
+                               correction_method = "fdr",
+                               domain_scope = "annotated")
+
+## put GO results into a dataframe
+
+go_cluster122_df <- head(go_cluster122$result, 100000)
+
+## Subset only required columns 
+
+go_cluster122_df_subset <- go_cluster122_df[,c("term_id", "term_name", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")]
+
+## Subset only KEGG pathway results
+
+go_cluster122_KEGGpathways <- go_cluster122_df_subset[grep('KEGG', go_cluster122_df_subset$source), ]
+
+## rename 'term_name' column name into 'Description' to merge with pathway category file
+
+colnames(go_cluster122_KEGGpathways) <- c("term_id", "Description", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")
+
+## Merge GO results dataframe with KEGG pathway category map file
+
+go_cluster122_KEGGpathways_category <- merge(map_pathway_file, go_cluster122_KEGGpathways, by = "Description")
+
+
+## Write the pathway enrichment results to a file  
+
+write.table(go_cluster122_KEGGpathways_category, file = "../../results/pathways_results/module9_p122_pathways.txt", sep = "\t", row.names = FALSE, col.names = T, quote= FALSE)
+```
+
+```{r}
+##### Module10 pathway enrichment analysis #####
+
+## Load input data [i.e., Corresponding entrez IDs of all genes present in the module]
+
+cluster79 <- read.delim("../../data/cluster_ids/module10_p79_ids.txt", header = F)
+names(cluster79) = "id"
+
+##get gene names corresponding to the ID
+
+cluster79_symbol <- merge(map_symbol_subset, cluster79, by = "id")
+#cluster79_symboln <- unique(cluster79_symbol$name) # <<- (run once) to confirm if the list has unique genes
+
+library(gprofiler2)
+go_cluster79 <- gost(query = unique(cluster79_symbol$name),
+                               numeric_ns = "ENTREZGENE_ACC",
+                               organism = "hsapiens",
+                               ordered_query = F,
+                               significant = T,
+                               measure_underrepresentation = F,
+                               evcodes = T,
+                               user_threshold = 0.05,
+                               correction_method = "fdr",
+                               domain_scope = "annotated")
+
+## put GO results into a dataframe
+
+go_cluster79_df <- head(go_cluster79$result, 100000)
+
+## Subset only required columns 
+
+go_cluster79_df_subset <- go_cluster79_df[,c("term_id", "term_name", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")]
+
+## Subset only KEGG pathway results
+
+go_cluster79_KEGGpathways <- go_cluster79_df_subset[grep('KEGG', go_cluster79_df_subset$source), ]
+
+## rename 'term_name' column name into 'Description' to merge with pathway category file
+
+colnames(go_cluster79_KEGGpathways) <- c("term_id", "Description", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")
+
+## Merge GO results dataframe with KEGG pathway category map file
+
+go_cluster79_KEGGpathways_category <- merge(map_pathway_file, go_cluster79_KEGGpathways, by = "Description")
+
+## Write the pathway enrichment results to a file  
+
+write.table(go_cluster79_KEGGpathways_category, file = "../../results/pathways_results/module10_p79_pathways.txt", sep = "\t", row.names = FALSE, col.names = T, quote= FALSE)
+```
+
+```{r}
+##### Module11 pathway enrichment analysis #####
+
+## Load input data [i.e., Corresponding entrez IDs of all genes present in the module]
+
+cluster123 <- read.delim("../../data/cluster_ids/module11_p123_ids.txt", header = F)
+names(cluster123) = "id"
+
+##get gene names corresponding to the ID
+
+cluster123_symbol <- merge(map_symbol_subset, cluster123, by = "id")
+#cluster123_symboln <- unique(cluster123_symbol$name) # <<- (run once) to confirm if the list has unique genes
+
+library(gprofiler2)
+go_cluster123 <- gost(query = unique(cluster123_symbol$name),
+                               numeric_ns = "ENTREZGENE_ACC",
+                               organism = "hsapiens",
+                               ordered_query = F,
+                               significant = T,
+                               measure_underrepresentation = F,
+                               evcodes = T,
+                               user_threshold = 0.05,
+                               correction_method = "fdr",
+                               domain_scope = "annotated")
+
+## put GO results into a dataframe
+
+go_cluster123_df <- head(go_cluster123$result, 100000)
+
+## Subset only required columns 
+
+go_cluster123_df_subset <- go_cluster123_df[,c("term_id", "term_name", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")]
+
+## Subset only KEGG pathway results
+
+go_cluster123_KEGGpathways <- go_cluster123_df_subset[grep('KEGG', go_cluster123_df_subset$source), ]
+
+## rename 'term_name' column name into 'Description' to merge with pathway category file
+
+colnames(go_cluster123_KEGGpathways) <- c("term_id", "Description", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")
+
+## Merge GO results dataframe with KEGG pathway category map file
+
+go_cluster123_KEGGpathways_category <- merge(map_pathway_file, go_cluster123_KEGGpathways, by = "Description")
+
+## Write the pathway enrichment results to a file  
+
+write.table(go_cluster123_KEGGpathways_category, file = "../../results/pathways_results/module11_p123_pathways.txt", sep = "\t", row.names = FALSE, col.names = T, quote= FALSE)
+```
+
+```{r}
+##### Module12 pathway enrichment analysis #####
+
+## Load input data [i.e., Corresponding entrez IDs of all genes present in the module]
+
+cluster220 <- read.delim("../../data/cluster_ids/module12_p220_ids.txt", header = F)
+names(cluster220) = "id"
+
+##get gene names corresponding to the ID
+
+cluster220_symbol <- merge(map_symbol_subset, cluster220, by = "id")
+#cluster220_symboln <- unique(cluster220_symbol$name) # <<- (run once) to confirm if the list has unique genes
+
+library(gprofiler2)
+go_cluster220 <- gost(query = unique(cluster220_symbol$name),
+                               numeric_ns = "ENTREZGENE_ACC",
+                               organism = "hsapiens",
+                               ordered_query = F,
+                               significant = T,
+                               measure_underrepresentation = F,
+                               evcodes = T,
+                               user_threshold = 0.05,
+                               correction_method = "fdr",
+                               domain_scope = "annotated")
+
+## put GO results into a dataframe
+
+go_cluster220_df <- head(go_cluster220$result, 100000)
+
+## Subset only required columns 
+
+go_cluster220_df_subset <- go_cluster220_df[,c("term_id", "term_name", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")]
+
+## Subset only KEGG pathway results
+
+go_cluster220_KEGGpathways <- go_cluster220_df_subset[grep('KEGG', go_cluster220_df_subset$source), ]
+
+## rename 'term_name' column name into 'Description' to merge with pathway category file
+
+colnames(go_cluster220_KEGGpathways) <- c("term_id", "Description", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")
+
+## Merge GO results dataframe with KEGG pathway category map file
+
+go_cluster220_KEGGpathways_category <- merge(map_pathway_file, go_cluster220_KEGGpathways, by = "Description")
+
+## Write the pathway enrichment results to a file  
+
+write.table(go_cluster220_KEGGpathways_category, file = "../../results/pathways_results/module12_p220_pathways.txt", sep = "\t", row.names = FALSE, col.names = T, quote= FALSE)
+```
+
+```{r}
+##### Module13 pathway enrichment analysis #####
+
+## Load input data [i.e., Corresponding entrez IDs of all genes present in the module]
+
+cluster150 <- read.delim("../../data/cluster_ids/module13_p150_ids.txt", header = F)
+names(cluster150) = "id"
+
+##get gene names corresponding to the ID
+
+cluster150_symbol <- merge(map_symbol_subset, cluster150, by = "id")
+#cluster150_symboln <- unique(cluster150_symbol$name) # <<- (run once) to confirm if the list has unique genes
+
+library(gprofiler2)
+go_cluster150 <- gost(query = unique(cluster150_symbol$name),
+                               numeric_ns = "ENTREZGENE_ACC",
+                               organism = "hsapiens",
+                               ordered_query = F,
+                               significant = T,
+                               measure_underrepresentation = F,
+                               evcodes = T,
+                               user_threshold = 0.05,
+                               correction_method = "fdr",
+                               domain_scope = "annotated")
+
+## put GO results into a dataframe
+
+go_cluster150_df <- head(go_cluster150$result, 100000)
+
+## Subset only required columns 
+
+go_cluster150_df_subset <- go_cluster150_df[,c("term_id", "term_name", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")]
+
+## Subset only KEGG pathway results
+
+go_cluster150_KEGGpathways <- go_cluster150_df_subset[grep('KEGG', go_cluster150_df_subset$source), ]
+
+## rename 'term_name' column name into 'Description' to merge with pathway category file
+
+colnames(go_cluster150_KEGGpathways) <- c("term_id", "Description", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")
+
+## Merge GO results dataframe with KEGG pathway category map file
+
+go_cluster150_KEGGpathways_category <- merge(map_pathway_file, go_cluster150_KEGGpathways, by = "Description")
+
+## Write the pathway enrichment results to a file  
+
+write.table(go_cluster150_KEGGpathways_category, file = "../../results/pathways_results/module13_p150_pathways.txt", sep = "\t", row.names = FALSE, col.names = T, quote= FALSE)
+```
+
+```{r}
+##### Module14 pathway enrichment analysis #####
+
+## Load input data [i.e., Corresponding entrez IDs of all genes present in the module]
+
+cluster73 <- read.delim("../../data/cluster_ids/module14_p73_ids.txt", header = F)
+names(cluster73) = "id"
+
+##get gene names corresponding to the ID
+
+cluster73_symbol <- merge(map_symbol_subset, cluster73, by = "id")
+#cluster73_symboln <- unique(cluster73_symbol$name) # <<- (run once) to confirm if the list has unique genes
+
+library(gprofiler2)
+go_cluster73 <- gost(query = unique(cluster73_symbol$name),
+                               numeric_ns = "ENTREZGENE_ACC",
+                               organism = "hsapiens",
+                               ordered_query = F,
+                               significant = T,
+                               measure_underrepresentation = F,
+                               evcodes = T,
+                               user_threshold = 0.05,
+                               correction_method = "fdr",
+                               domain_scope = "annotated")
+
+## put GO results into a dataframe
+
+go_cluster73_df <- head(go_cluster73$result, 100000)
+
+## Subset only required columns 
+
+go_cluster73_df_subset <- go_cluster73_df[,c("term_id", "term_name", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")]
+
+## Subset only KEGG pathway results
+
+go_cluster73_KEGGpathways <- go_cluster73_df_subset[grep('KEGG', go_cluster73_df_subset$source), ]
+
+## rename 'term_name' column name into 'Description' to merge with pathway category file
+
+colnames(go_cluster73_KEGGpathways) <- c("term_id", "Description", "query_size", "intersection_size",
+                                              "p_value", "intersection", "source")
+
+## Merge GO results dataframe with KEGG pathway category map file
+
+go_cluster73_KEGGpathways_category <- merge(map_pathway_file, go_cluster73_KEGGpathways, by = "Description")
+
+## Write the pathway enrichment results to a file  
+
+write.table(go_cluster73_KEGGpathways_category, file = "../../results/pathways_results/module14_p73_pathways.txt", sep = "\t", row.names = FALSE, col.names = T, quote= FALSE)
+```
+

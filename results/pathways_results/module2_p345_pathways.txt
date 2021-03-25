@@ -1,0 +1,16 @@
+Description	Subcategory	Majorcategory	term_id	query_size	intersection_size	p_value	intersection	source
+Biosynthesis of unsaturated fatty acids	Lipid metabolism	Metabolism	KEGG:01040	163	4	0.0212643981157175	FADS1,HACD1,HSD17B12,ELOVL5	KEGG
+Fanconi anemia pathway	Replication and repair	Genetic Information Processing	KEGG:03460	163	16	6.7500298664934e-13	ATR,FANCA,FANCC,FANCE,FANCG,MLH1,TOP3A,USP1,POLI,POLK,REV1,FANCL,MUS81,SLX4,FAAP24,RMI2	KEGG
+Fatty acid metabolism	Global and overview maps	Metabolism	KEGG:01212	163	6	0.0133314155961191	CPT1A,FADS1,HSD17B8,HACD1,HSD17B12,ELOVL5	KEGG
+Hepatocellular carcinoma	Cancer: specific types	Human Diseases	KEGG:05225	163	11	0.00775463751854295	SMAD2,SMAD3,SMARCA2,SMARCA4,SMARCC1,SMARCD2,SMARCE1,DPF3,ARID1A,POLK,PBRM1	KEGG
+Homologous recombination	Replication and repair	Genetic Information Processing	KEGG:03440	163	11	1.64183448384033e-08	ATM,BARD1,NBN,RAD51B,RAD51D,RAD52,TOP3A,POLD3,UIMC1,BRCC3,MUS81	KEGG
+Human T-cell leukemia virus 1 infection	Infectious disease: viral	Human Diseases	KEGG:05166	163	13	0.00764667017159254	ATM,ATR,CREBBP,ATF6B,EGR2,EP300,FDPS,SMAD2,SMAD3,TRRAP,KAT2B,KAT5,CRTC3	KEGG
+Lysine degradation	Amino acid metabolism	Metabolism	KEGG:00310	163	13	1.64183448384033e-08	EZH1,EZH2,NSD2,KMT2D,SETD1A,EHMT2,NSD3,SMYD2,KMT2C,PRDM16,NSD1,SMYD3,CAMKMT	KEGG
+MicroRNAs in cancer	Cancer: overview	Human Diseases	KEGG:05206	163	14	0.041701832607125	ATM,BMPR2,CREBBP,CYP24A1,EP300,EZH2,NOTCH2,NOTCH3,NOTCH4,ZEB1,ZEB2,HDAC5,SIRT1,ZFPM2	KEGG
+Non-homologous end-joining	Replication and repair	Genetic Information Processing	KEGG:03450	163	3	0.0212643981157175	FEN1,XRCC4,XRCC5	KEGG
+Notch signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04330	163	10	2.52570896373499e-06	CREBBP,EP300,RBPJ,NOTCH2,NOTCH3,NOTCH4,KAT2B,NUMBL,NCOR2,MAML2	KEGG
+Signaling pathways regulating pluripotency of stem cells	Cellular community - eukaryotes	Cellular Processes	KEGG:04550	163	11	0.00279882805184107	ACVR2A,BMPR1A,BMPR2,ESRRB,HOXA1,JARID2,SMAD2,SMAD3,POU5F1,REST,RIF1	KEGG
+Steroid biosynthesis	Lipid metabolism	Metabolism	KEGG:00100	163	5	0.000834297980096265	CYP24A1,CYP27B1,DHCR7,FDFT1,SOAT2	KEGG
+TGF-beta signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04350	163	10	0.000432432031742672	ACVR2A,BMPR1A,BMPR2,CREBBP,EP300,SMAD2,SMAD3,GDF5,ZFYVE9,ZFYVE16	KEGG
+Thyroid hormone signaling pathway	Endocrine system	Organismal Systems	KEGG:04919	163	16	8.81570256289398e-08	CREBBP,EP300,GATA4,NOTCH2,NOTCH3,NOTCH4,RXRB,NCOA1,KAT2B,MED27,NCOR1,MED24,NCOA2,MED13L,MED4,MED12L	KEGG
+Transcriptional misregulation in cancer	Cancer: overview	Human Diseases	KEGG:05202	163	11	0.0212643981157175	ATF1,ATM,RUNX1,MAX,PBX1,RXRB,ZEB1,KDM6A,NSD2,NCOR1,POLK	KEGG

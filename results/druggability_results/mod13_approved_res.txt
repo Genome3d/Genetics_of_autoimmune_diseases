@@ -1,0 +1,2 @@
+gene	drug
+KEAP1	DIMETHYL FUMARATE

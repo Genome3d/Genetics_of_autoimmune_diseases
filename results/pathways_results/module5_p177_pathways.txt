@@ -1,0 +1,20 @@
+Description	Subcategory	Majorcategory	term_id	query_size	intersection_size	p_value	intersection	source
+Amoebiasis	Infectious disease: parasitic	Human Diseases	KEGG:05146	92	5	0.0392738582106035	COL4A2,COL4A5,ITGAM,LAMB1,LAMC1	KEGG
+Arrhythmogenic right ventricular cardiomyopathy	Cardiovascular disease	Human Diseases	KEGG:05412	92	8	3.9008583810834e-05	CDH2,ITGA2,ITGA4,ITGA5,ITGA9,ITGB4,ITGB5,ITGA8	KEGG
+Cell adhesion molecules	Signaling molecules and interaction	Environmental Information Processing	KEGG:04514	92	13	4.05658119178193e-07	CD6,CD80,CD40,CD58,CDH2,CDH3,CDH15,CTLA4,ITGA4,ITGA9,ITGAL,ITGAM,ITGA8	KEGG
+Complement and coagulation cascades	Immune system	Organismal Systems	KEGG:04610	92	9	1.00495751294077e-05	C2,C4A,C4B,F5,F12,ITGAM,ITGAX,CD46,PLAU	KEGG
+Dilated cardiomyopathy	Cardiovascular disease	Human Diseases	KEGG:05414	92	7	0.00107375951543177	ITGA2,ITGA4,ITGA5,ITGA9,ITGB4,ITGB5,ITGA8	KEGG
+ECM-receptor interaction	Signaling molecules and interaction	Environmental Information Processing	KEGG:04512	92	18	3.66250274395514e-16	CD36,CD47,COL4A2,COL4A5,TNC,IBSP,ITGA2,ITGA4,ITGA5,ITGA9,ITGB4,ITGB5,LAMB1,LAMC1,THBS3,TNR,TNXB,ITGA8	KEGG
+Focal adhesion	Cellular community - eukaryotes	Cellular Processes	KEGG:04510	92	18	5.16177382920803e-10	COL4A2,COL4A5,FLNB,TNC,IBSP,ITGA2,ITGA4,ITGA5,ITGA9,ITGB4,ITGB5,LAMB1,LAMC1,RAP1A,THBS3,TNR,TNXB,ITGA8	KEGG
+Hematopoietic cell lineage	Immune system	Organismal Systems	KEGG:04640	92	7	0.00107375951543177	CD5,CD36,CSF1,ITGA2,ITGA4,ITGA5,ITGAM	KEGG
+Human papillomavirus infection	Infectious disease: viral	Human Diseases	KEGG:05165	92	16	1.71089793491569e-05	COL4A2,COL4A5,TNC,IBSP,ITGA2,ITGA4,ITGA5,ITGA9,ITGB4,ITGB5,LAMB1,LAMC1,THBS3,TNR,TNXB,ITGA8	KEGG
+Hypertrophic cardiomyopathy	Cardiovascular disease	Human Diseases	KEGG:05410	92	7	0.00091290946008441	ITGA2,ITGA4,ITGA5,ITGA9,ITGB4,ITGB5,ITGA8	KEGG
+Leukocyte transendothelial migration	Immune system	Organismal Systems	KEGG:04670	92	6	0.0142091455397295	CYBA,ITGA4,ITGAL,ITGAM,RAP1A,SIPA1	KEGG
+Malaria	Infectious disease: parasitic	Human Diseases	KEGG:05144	92	5	0.00205302659445375	CD36,CD40,CD81,ITGAL,THBS3	KEGG
+Pertussis	Infectious disease: bacterial	Human Diseases	KEGG:05133	92	5	0.013627196218308	C2,C4A,C4B,ITGA5,ITGAM	KEGG
+Phagosome	Transport and catabolism	Cellular Processes	KEGG:04145	92	10	9.06925241764009e-05	CD36,CYBA,FCAR,ITGA2,ITGA5,ITGAM,ITGB5,LAMP1,MRC1,THBS3	KEGG
+PI3K-Akt signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04151	92	17	1.00495751294077e-05	COL4A2,COL4A5,CSF1,TNC,IBSP,ITGA2,ITGA4,ITGA5,ITGA9,ITGB4,ITGB5,LAMB1,LAMC1,THBS3,TNR,TNXB,ITGA8	KEGG
+Protein digestion and absorption	Digestive system	Organismal Systems	KEGG:04974	92	11	6.77986112259134e-07	COL4A2,COL4A5,COL8A1,COL11A2,COL19A1,COL14A1,COL21A1,COL25A1,COL27A1,COL23A1,COL28A1	KEGG
+Regulation of actin cytoskeleton	Cell motility	Cellular Processes	KEGG:04810	92	10	0.00145695320281364	ITGA2,ITGA4,ITGA5,ITGA9,ITGAL,ITGAM,ITGAX,ITGB4,ITGB5,ITGA8	KEGG
+Small cell lung cancer	Cancer: specific types	Human Diseases	KEGG:05222	92	5	0.0279090088785009	COL4A2,COL4A5,ITGA2,LAMB1,LAMC1	KEGG
+Staphylococcus aureus infection	Infectious disease: bacterial	Human Diseases	KEGG:05150	92	6	0.00391047257154018	C2,C4A,C4B,FCAR,ITGAL,ITGAM	KEGG

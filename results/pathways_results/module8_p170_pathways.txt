@@ -1,0 +1,7 @@
+Description	Subcategory	Majorcategory	term_id	query_size	intersection_size	p_value	intersection	source
+Amyotrophic lateral sclerosis	Neurodegenerative disease	Human Diseases	KEGG:05014	63	8	0.042232792361677	GLE1,NCBP1,NUP88,NUP214,SETX,NUP210,NUP62,NUP54	KEGG
+Basal transcription factors	Transcription	Genetic Information Processing	KEGG:03022	63	6	1.05768079454754e-05	GTF2H4,MNAT1,TAF4B,TAF7,TAF11,GTF2A1L	KEGG
+mRNA surveillance pathway	Translation	Genetic Information Processing	KEGG:03015	63	6	0.00073799882095072	GLE1,NCBP1,DDX39B,CPSF4,CASC3,SSU72	KEGG
+RNA polymerase	Transcription	Genetic Information Processing	KEGG:03020	63	5	3.25190527003384e-05	POLR3D,POLR2C,POLR2E,ZNRD1,POLR3H	KEGG
+RNA transport	Translation	Genetic Information Processing	KEGG:03013	63	14	1.32582737201442e-09	CLNS1A,GLE1,KPNB1,NCBP1,NUP88,DDX39B,NUP214,THOC5,CASC3,NUP210,NUP62,NUP54,GEMIN7,GEMIN6	KEGG
+Spliceosome	Transcription	Genetic Information Processing	KEGG:03040	63	23	6.34933385196744e-23	CDC5L,DHX15,HSPA6,NCBP1,SNU13,SRSF2,SRSF5,SNRNP70,SNRPC,SNRPF,DDX39B,DHX16,PRPF18,SNRNP40,USP39,SF3B2,U2SURP,SF3B1,CRNKL1,CDC40,PPIL1,WBP11,RBM17	KEGG

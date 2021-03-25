@@ -1,0 +1,5 @@
+id	gene	disease	snp_disease	DC	CC	EC
+3320	HSP90AA1	shared	crd,ra	0.155	0.386	0.158
+9793	CKAP5	grd	grd	0.215	0.407	0.219
+22919	MAPRE1	ms	ms	0.21	0.4	0.218
+23332	CLASP1	shared	crd,pbc,sle,ulc	0.205	0.397	0.218

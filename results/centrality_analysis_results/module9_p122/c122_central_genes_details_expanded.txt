@@ -1,0 +1,11 @@
+id	gene	disease	snp_disease	DC	CC	EC
+107	ADCY1	sle	sle	0.446	0.54	0.177
+108	ADCY2	ssc	ssc	0.455	0.543	0.177
+109	ADCY3	shared	crd,ms,t1d,ulc	0.446	0.54	0.177
+351	APP	sle	sle	0.405	0.511	0.174
+2773	GNAI3	sle	sle	0.339	0.49	0.167
+6357	CCL13	crd	crd	0.298	0.476	0.165
+6364	CCL20	ulc	ulc	0.306	0.478	0.166
+6753	SSTR3	identical	grd,vit	0.314	0.476	0.165
+23566	LPAR3	t1d	t1d	0.388	0.513	0.174
+59345	GNB4	shared	jia,pa	0.504	0.558	0.188

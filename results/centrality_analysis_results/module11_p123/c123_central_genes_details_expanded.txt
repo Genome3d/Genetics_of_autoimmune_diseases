@@ -1,0 +1,10 @@
+id	gene	disease	snp_disease	DC	CC	EC
+161	AP2A2	sle	sle	0.238	0.405	0.191
+1785	DNM2	shared	pso,sjs	0.254	0.415	0.194
+2580	GAK	shared	pso,sle	0.295	0.436	0.198
+5286	PIK3C2A	crd	crd	0.254	0.425	0.189
+5878	RAB5C	shared	ms,pso,sle,vit	0.336	0.464	0.202
+6869	TACR1	pso	pso	0.23	0.405	0.189
+10092	ARPC5	sle	sle	0.27	0.428	0.196
+10109	ARPC2	shared	crd,ulc	0.27	0.428	0.196
+10552	ARPC1A	ssc	ssc	0.287	0.449	0.196

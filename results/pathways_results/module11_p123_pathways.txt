@@ -1,0 +1,10 @@
+Description	Subcategory	Majorcategory	term_id	query_size	intersection_size	p_value	intersection	source
+Bacterial invasion of epithelial cells	Infectious disease: bacterial	Human Diseases	KEGG:05100	49	5	0.000832529588022817	DNM2,ARPC5,ARPC1B,ARPC2,ARPC1A	KEGG
+Endocytosis	Transport and catabolism	Cellular Processes	KEGG:04144	49	20	2.30362659395441e-16	AP2A2,AMPH,DNM2,RAB5B,RAB5C,SH3GL3,WIPF1,SNX3,RABEP1,ARPC5,ARPC1B,ARPC2,ARPC1A,SNX5,EPN1,SH3KBP1,EPS15L1,SNX6,VPS26B,SNX32	KEGG
+Fc gamma R-mediated phagocytosis	Immune system	Organismal Systems	KEGG:04666	49	9	9.18134818834472e-08	AMPH,CFL1,DNM2,FCGR3A,GSN,ARPC5,ARPC1B,ARPC2,ARPC1A	KEGG
+Lysosome	Transport and catabolism	Cellular Processes	KEGG:04142	49	4	0.0454710411670312	M6PR,AP1M2,AP3M2,GGA3	KEGG
+Pathogenic Escherichia coli infection	Infectious disease: bacterial	Human Diseases	KEGG:05130	49	8	0.000252830311383628	MYO5A,MYO5B,WIPF1,ARPC5,ARPC1B,ARPC2,ARPC1A,CYFIP2	KEGG
+Phagosome	Transport and catabolism	Cellular Processes	KEGG:04145	49	6	0.00215829087608494	FCGR3A,M6PR,RAB5B,RAB5C,VAMP3,CORO1A	KEGG
+Regulation of actin cytoskeleton	Cell motility	Cellular Processes	KEGG:04810	49	7	0.00215829087608494	CFL1,GSN,ARPC5,ARPC1B,ARPC2,ARPC1A,CYFIP2	KEGG
+Salmonella infection	Infectious disease: bacterial	Human Diseases	KEGG:05132	49	10	8.8572337373215e-06	DNM2,M6PR,PIK3C2A,RAB5B,RAB5C,ARPC5,ARPC1B,ARPC2,ARPC1A,CYFIP2	KEGG
+Tuberculosis	Infectious disease: bacterial	Human Diseases	KEGG:05152	49	5	0.0279820581343943	FCGR3A,LSP1,RAB5B,RAB5C,CORO1A	KEGG

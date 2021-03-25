@@ -1,0 +1,6 @@
+id	gene	disease	snp_disease	DC	CC	EC
+50	ACO2	shared	ced,crd,ms,pso,ra,vit	0.065	0.309	0.162
+498	ATP5A1	as	as	0.118	0.304	0.266
+1738	DLD	ulc	ulc	0.082	0.315	0.159
+4705	NDUFA10	shared	pso,sle	0.094	0.293	0.342
+5162	PDHB	shared	ra,sle,ssc	0.094	0.331	0.203

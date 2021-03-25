@@ -1,0 +1,2 @@
+gene	drug
+CDC5L	GEMCITABINE

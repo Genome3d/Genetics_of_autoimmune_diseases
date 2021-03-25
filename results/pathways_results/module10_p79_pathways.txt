@@ -1,0 +1,10 @@
+Description	Subcategory	Majorcategory	term_id	query_size	intersection_size	p_value	intersection	source
+Cholesterol metabolism	Digestive system	Organismal Systems	KEGG:04979	39	3	0.00877689532409633	LIPA,LIPC,LRP1	KEGG
+Choline metabolism in cancer	Cancer: overview	Human Diseases	KEGG:05231	39	3	0.0386334338540238	DGKD,DGKI,CHPT1	KEGG
+Glycerolipid metabolism	Lipid metabolism	Metabolism	KEGG:00561	39	11	2.83654198868002e-14	LIPC,DGKD,DGKI,AGPAT1,MGLL,LPIN1,AGPAT4,GPAM,LPIN3,PLPP4,LCLAT1	KEGG
+Glycerophospholipid metabolism	Lipid metabolism	Metabolism	KEGG:00564	39	14	2.38283639477571e-16	DGKD,DGKI,PEMT,AGPAT1,LPIN1,AGPAT4,CHPT1,GPAM,LPIN3,MBOAT7,PTDSS2,PLD4,PLPP4,LCLAT1	KEGG
+Glycosaminoglycan biosynthesis - chondroitin sulfate / dermatan sulfate	Glycan biosynthesis and metabolism	Metabolism	KEGG:00532	39	9	1.40773862341844e-15	UST,DSE,CHST11,CSGALNACT2,CHST12,CSGALNACT1,XYLT1,B3GALT6,CHSY3	KEGG
+Glycosaminoglycan biosynthesis - heparan sulfate / heparin	Glycan biosynthesis and metabolism	Metabolism	KEGG:00534	39	6	8.44851853805915e-09	EXT1,EXTL3,HS2ST1,HS3ST2,XYLT1,B3GALT6	KEGG
+Metabolic pathways	Global and overview maps	Metabolism	KEGG:01100	39	23	1.4401739792884e-07	EXT1,EXTL3,LIPC,DGKD,DGKI,PEMT,AGPAT1,MGLL,LPIN1,DSE,CSGALNACT2,CSGALNACT1,AGPAT4,CHPT1,GPAM,HPSE2,XYLT1,LPIN3,PTDSS2,PLD4,B3GALT6,LCLAT1,CHSY3	KEGG
+Phospholipase D signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04072	39	4	0.0206144013122445	DGKD,DGKI,AGPAT1,AGPAT4	KEGG
+Retrograde endocannabinoid signaling	Nervous system	Organismal Systems	KEGG:04723	39	4	0.0206144013122445	DAGLA,MGLL,ABHD6,DAGLB	KEGG

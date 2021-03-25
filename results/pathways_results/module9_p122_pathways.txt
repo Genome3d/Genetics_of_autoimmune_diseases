@@ -1,0 +1,52 @@
+Description	Subcategory	Majorcategory	term_id	query_size	intersection_size	p_value	intersection	source
+Adrenergic signaling in cardiomyocytes	Circulatory system	Organismal Systems	KEGG:04261	79	5	0.0386102756830257	ADCY1,ADCY2,ADCY3,GNAI3,PLCB3	KEGG
+Aldosterone synthesis and secretion	Endocrine system	Organismal Systems	KEGG:04925	79	5	0.00940499027126206	ADCY1,ADCY2,ADCY3,PDE2A,PLCB3	KEGG
+Apelin signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04371	79	7	0.00197560042514327	ADCY1,ADCY2,ADCY3,GNAI3,PLCB3,GNA13,GNB4	KEGG
+Bile secretion	Digestive system	Organismal Systems	KEGG:04976	79	4	0.0323742340063491	ADCY1,ADCY2,ADCY3,SCTR	KEGG
+Calcium signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04020	79	7	0.010796245051343	ADCY1,ADCY2,ADCY3,EDNRB,HTR7,PLCB3,PTGER3	KEGG
+cAMP signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04024	79	16	7.10150237229153e-09	ADCY1,ADCY2,ADCY3,ADORA1,EDN3,GABBR1,GCG,GIPR,GNAI3,HTR1F,PDE4A,PDE4B,PDE4C,PTGER3,TSHR,GABBR2	KEGG
+cGMP-PKG signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04022	79	10	5.13866284078534e-05	ADCY1,ADCY2,ADCY3,ADORA1,EDNRB,GNA12,GNAI3,PDE2A,PLCB3,GNA13	KEGG
+Chemokine signaling pathway	Immune system	Organismal Systems	KEGG:04062	79	20	4.11446289452799e-14	ADCY1,ADCY2,ADCY3,GRK3,CCR1,CCR3,CCR6,GNAI3,XCR1,GRK5,CXCR1,CXCR2,PLCB3,CCL13,CCL20,CXCL5,CXCR6,CCL28,GNB4,CCR2	KEGG
+Cholinergic synapse	Nervous system	Organismal Systems	KEGG:04725	79	7	0.000764829107136988	ADCY1,ADCY2,ADCY3,GNAI3,KCNJ4,PLCB3,GNB4	KEGG
+Circadian entrainment	Environmental adaptation	Organismal Systems	KEGG:04713	79	6	0.00197560042514327	ADCY1,ADCY2,ADCY3,GNAI3,PLCB3,GNB4	KEGG
+Cortisol synthesis and secretion	Endocrine system	Organismal Systems	KEGG:04927	79	5	0.00197560042514327	ADCY1,ADCY2,ADCY3,PDE8A,PLCB3	KEGG
+Cushing syndrome	Endocrine and metabolic disease	Human Diseases	KEGG:04934	79	6	0.0114299915294711	ADCY1,ADCY2,ADCY3,GNAI3,PDE8A,PLCB3	KEGG
+Cytokine-cytokine receptor interaction	Signaling molecules and interaction	Environmental Information Processing	KEGG:04060	79	12	0.000202129878183593	CCR1,CCR3,CCR6,XCR1,CXCR1,CXCR2,CCL13,CCL20,CXCL5,CXCR6,CCL28,CCR2	KEGG
+Estrogen signaling pathway	Endocrine system	Organismal Systems	KEGG:04915	79	7	0.00197560042514327	ADCY1,ADCY2,ADCY3,GABBR1,GNAI3,PLCB3,GABBR2	KEGG
+GABAergic synapse	Nervous system	Organismal Systems	KEGG:04727	79	7	0.000202129878183593	ADCY1,ADCY2,ADCY3,GABBR1,GNAI3,GABBR2,GNB4	KEGG
+Gap junction	Cellular community - eukaryotes	Cellular Processes	KEGG:04540	79	5	0.0063915398110783	ADCY1,ADCY2,ADCY3,GNAI3,PLCB3	KEGG
+Gastric acid secretion	Digestive system	Organismal Systems	KEGG:04971	79	6	0.000665874751910255	ADCY1,ADCY2,ADCY3,GNAI3,KCNJ16,PLCB3	KEGG
+Glutamatergic synapse	Nervous system	Organismal Systems	KEGG:04724	79	7	0.000768009557806324	ADCY1,ADCY2,ADCY3,GRK3,GNAI3,PLCB3,GNB4	KEGG
+GnRH signaling pathway	Endocrine system	Organismal Systems	KEGG:04912	79	4	0.0346404338417503	ADCY1,ADCY2,ADCY3,PLCB3	KEGG
+Growth hormone synthesis, secretion and action	Endocrine system	Organismal Systems	KEGG:04935	79	6	0.00448098303561131	ADCY1,ADCY2,ADCY3,GNAI3,PLCB3,SSTR3	KEGG
+Human cytomegalovirus infection	Infectious disease: viral	Human Diseases	KEGG:05163	79	13	3.1775896621955e-06	ADCY1,ADCY2,ADCY3,CCR1,CCR3,GNA12,GNAI3,CXCR2,PLCB3,PTGER3,PTGER4,GNA13,GNB4	KEGG
+Inflammatory mediator regulation of TRP channels	Sensory system	Organismal Systems	KEGG:04750	79	5	0.00999017845536758	ADCY1,ADCY2,ADCY3,PLCB3,PTGER4	KEGG
+Insulin secretion	Endocrine system	Organismal Systems	KEGG:04911	79	5	0.0059503424870496	ADCY1,ADCY2,ADCY3,GCG,PLCB3	KEGG
+Long-term depression	Nervous system	Organismal Systems	KEGG:04730	79	4	0.00933771927102778	GNA12,GNAI3,PLCB3,GNA13	KEGG
+Melanogenesis	Endocrine system	Organismal Systems	KEGG:04916	79	6	0.0021961731314567	ADCY1,ADCY2,ADCY3,EDNRB,GNAI3,PLCB3	KEGG
+Morphine addiction	Substance dependence	Human Diseases	KEGG:05032	79	16	1.08144979646732e-14	ADCY1,ADCY2,ADCY3,ADORA1,GRK3,GABBR1,GNAI3,GRK5,PDE2A,PDE4A,PDE4B,PDE4C,PDE8A,GABBR2,PDE7B,GNB4	KEGG
+Neuroactive ligand-receptor interaction	Signaling molecules and interaction	Environmental Information Processing	KEGG:04080	79	28	4.38320733681751e-17	ADORA1,C5,CALCB,LTB4R,DRD4,EDN3,EDNRB,FPR1,FPR3,GABBR1,GCG,GIPR,HTR1F,HTR7,MLN,OPRL1,PTGER3,PTGER4,PTGIR,PTH2R,SCTR,SSTR3,TSHR,GABBR2,LPAR3,GAL,S1PR5,RXFP2	KEGG
+Nicotinate and nicotinamide metabolism	Metabolism of cofactors and vitamins	Metabolism	KEGG:00760	79	5	0.000187983965967535	ENPP1,NMNAT2,QPRT,NADSYN1,NADK2	KEGG
+Ovarian steroidogenesis	Endocrine system	Organismal Systems	KEGG:04913	79	3	0.0350640052270937	ADCY1,ADCY2,ADCY3	KEGG
+Oxytocin signaling pathway	Endocrine system	Organismal Systems	KEGG:04921	79	6	0.0118970012161554	ADCY1,ADCY2,ADCY3,GNAI3,KCNJ4,PLCB3	KEGG
+Pancreatic secretion	Digestive system	Organismal Systems	KEGG:04972	79	5	0.0105352070753357	ADCY1,ADCY2,ADCY3,PLCB3,SCTR	KEGG
+Pantothenate and CoA biosynthesis	Metabolism of cofactors and vitamins	Metabolism	KEGG:00770	79	2	0.0428575555191646	ENPP1,PPCDC	KEGG
+Parathyroid hormone synthesis, secretion and action	Endocrine system	Organismal Systems	KEGG:04928	79	10	1.15346989060097e-06	ADCY1,ADCY2,ADCY3,GNA12,GNAI3,PDE4A,PDE4B,PDE4C,PLCB3,GNA13	KEGG
+Pathways in cancer	Cancer: overview	Human Diseases	KEGG:05200	79	12	0.0153579199237558	ADCY1,ADCY2,ADCY3,EDNRB,GNA12,GNAI3,PLCB3,PTGER3,PTGER4,GNA13,LPAR3,GNB4	KEGG
+Phospholipase D signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04072	79	12	3.05724098068503e-07	ADCY1,ADCY2,ADCY3,GNA12,CXCR1,CXCR2,PLCB3,DGKE,CYTH3,CYTH1,GNA13,LPAR3	KEGG
+Platelet activation	Immune system	Organismal Systems	KEGG:04611	79	7	0.00123616316985995	ADCY1,ADCY2,ADCY3,GNAI3,PLCB3,PTGIR,GNA13	KEGG
+Progesterone-mediated oocyte maturation	Endocrine system	Organismal Systems	KEGG:04914	79	4	0.0382797791799856	ADCY1,ADCY2,ADCY3,GNAI3	KEGG
+Purine metabolism	Nucleotide metabolism	Metabolism	KEGG:00230	79	12	7.33311105986779e-08	ADCY1,ADCY2,ADCY3,ADK,PDE2A,PDE4A,PDE4B,PDE4C,PDE8A,PDE9A,ENPP1,PDE7B	KEGG
+Rap1 signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04015	79	7	0.0131267807351392	ADCY1,ADCY2,ADCY3,FPR1,GNAI3,PLCB3,LPAR3	KEGG
+Regulation of lipolysis in adipocytes	Endocrine system	Organismal Systems	KEGG:04923	79	7	1.06426470801556e-05	ADCY1,ADCY2,ADCY3,ADORA1,GNAI3,PTGER3,TSHR	KEGG
+Relaxin signaling pathway	Endocrine system	Organismal Systems	KEGG:04926	79	8	0.000255393152500213	ADCY1,ADCY2,ADCY3,EDNRB,GNAI3,PLCB3,GNB4,RXFP2	KEGG
+Renin secretion	Endocrine system	Organismal Systems	KEGG:04924	79	5	0.00259426259527288	ADORA1,EDN3,GNAI3,PLCB3,PTGER4	KEGG
+Retrograde endocannabinoid signaling	Nervous system	Organismal Systems	KEGG:04723	79	6	0.0105352070753357	ADCY1,ADCY2,ADCY3,GNAI3,PLCB3,GNB4	KEGG
+Riboflavin metabolism	Metabolism of cofactors and vitamins	Metabolism	KEGG:00740	79	2	0.00931667704719817	ACP2,ENPP1	KEGG
+Salivary secretion	Digestive system	Organismal Systems	KEGG:04970	79	4	0.0341229468628975	ADCY1,ADCY2,ADCY3,PLCB3	KEGG
+Serotonergic synapse	Nervous system	Organismal Systems	KEGG:04726	79	6	0.00370061507715758	APP,GNAI3,HTR1F,HTR7,PLCB3,GNB4	KEGG
+Sphingolipid signaling pathway	Signal transduction	Environmental Information Processing	KEGG:04071	79	6	0.00452604094316974	ADORA1,GNA12,GNAI3,PLCB3,GNA13,S1PR5	KEGG
+Taste transduction	Sensory system	Organismal Systems	KEGG:04742	79	5	0.00582986963806976	GABBR1,HTR1F,PLCB3,GABBR2,TAS1R3	KEGG
+Thyroid hormone synthesis	Endocrine system	Organismal Systems	KEGG:04918	79	7	7.7659326305518e-05	ADCY1,ADCY2,ADCY3,PLCB3,SLC5A5,TG,TSHR	KEGG
+Vascular smooth muscle contraction	Circulatory system	Organismal Systems	KEGG:04270	79	9	6.7314989039125e-05	ADCY1,ADCY2,ADCY3,CALCB,EDN3,GNA12,PLCB3,PTGIR,GNA13	KEGG
+Viral protein interaction with cytokine and cytokine receptor	Signaling molecules and interaction	Environmental Information Processing	KEGG:04061	79	11	6.07362759842529e-08	CCR1,CCR3,CCR6,XCR1,CXCR1,CXCR2,CCL13,CCL20,CXCL5,CCL28,CCR2	KEGG

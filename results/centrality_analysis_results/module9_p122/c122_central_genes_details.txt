@@ -1,0 +1,11 @@
+id	name	disease
+107	ADCY1	sle
+108	ADCY2	ssc
+109	ADCY3	shared
+351	APP	sle
+2773	GNAI3	sle
+6357	CCL13	crd
+6364	CCL20	ulc
+6753	SSTR3	identical
+23566	LPAR3	t1d
+59345	GNB4	shared

@@ -1,0 +1,1114 @@
+---
+title: "Visualization_for_manuscript"
+author: "Sreemol Gokuladhas"
+date: "24/03/2021"
+output: html_document
+---
+
+```{r}
+
+## The required data is available either in ../../data or ../../results directory
+
+## Figure 1. Global overview of the genetic architecture of autoimmune diseases (AiDs).
+
+## Set working directory 
+
+setwd("/Genetics_of_autoimmune_diseases/scripts/R")
+
+## Load required packages
+
+library(dplyr)
+library(data.table)
+library(ggplot2)
+
+## Load the data
+
+alo <- read.delim("../../results/codes3d_results/alopecia_allhic/significant_eqtls.txt", header = T, sep = "\t")
+as <- read.delim("../../results/codes3d_results/ankylosing_spondylitis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+ced <- read.delim("../../results/codes3d_results/celiac_disease_allhic/significant_eqtls.txt", header = T, sep = "\t")
+crd <- read.delim("../../results/codes3d_results/crohns_disease_allhic/significant_eqtls.txt", header = T, sep = "\t")
+ee <- read.delim("../../results/codes3d_results/eosinophilic_esophagitis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+jia <- read.delim("../../results/codes3d_results/juvenile_idiopathic_arthritis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+grd <- read.delim("../../results/codes3d_results/graves_disease_allhic/significant_eqtls.txt", header = T, sep = "\t")
+ms <- read.delim("../../results/codes3d_results/multiple_sclerosis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+pbc <- read.delim("../../results/codes3d_results/primary_biliary_cirrhosis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+pso <- read.delim("../../results/codes3d_results/psoriasis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+pa <- read.delim("../../results/codes3d_results/psoriatic_arthritis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+ra <- read.delim("../../results/codes3d_results/rheumatoid_arthritis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+sjs <- read.delim("../../results/codes3d_results/sjögrens_syndrome_allhic/significant_eqtls.txt", header = T, sep = "\t")
+sle <- read.delim("../../results/codes3d_results/systemic_lupus_erythematosus_allhic/significant_eqtls.txt", header = T, sep = "\t")
+ssc <- read.delim("../../results/codes3d_results/systemic_scleroderma_allhic/significant_eqtls.txt", header = T, sep = "\t")
+t1d <- read.delim("../../results/codes3d_results/type_I_diabetes_allhic/significant_eqtls.txt", header = T, sep = "\t")
+ulc <- read.delim("../../results/codes3d_results/ulcerative_colitis_allhic/significant_eqtls.txt", header = T, sep = "\t")
+vit <- read.delim("../../results/codes3d_results/vitiligo_allhic/significant_eqtls.txt", header = T, sep = "\t")
+
+``` 
+
+
+```{r}
+
+## Data for Figure 1B
+
+## subset only snp and gene columns for further analysis and add another column for the disease
+
+alo_snp_gene_disease <- unique(subset(alo, select = c("snp","gene")))
+alo_snp_gene_disease$disease <- "alo"
+as_snp_gene_disease <- unique(subset(as, select = c("snp","gene")))
+as_snp_gene_disease$disease <- "as"
+ced_snp_gene_disease <- unique(subset(ced, select = c("snp","gene")))
+ced_snp_gene_disease$disease <- "ced"
+crd_snp_gene_disease <- unique(subset(crd, select = c("snp","gene")))
+crd_snp_gene_disease$disease <- "crd"
+ee_snp_gene_disease <- unique(subset(ee, select = c("snp","gene")))
+ee_snp_gene_disease$disease <- "ee"
+jia_snp_gene_disease <- unique(subset(jia, select = c("snp","gene")))
+jia_snp_gene_disease$disease <- "jia"
+grd_snp_gene_disease <- unique(subset(grd, select = c("snp","gene")))
+grd_snp_gene_disease$disease <- "grd"
+ms_snp_gene_disease <- unique(subset(ms, select = c("snp","gene")))
+ms_snp_gene_disease$disease <- "ms"
+pbc_snp_gene_disease <- unique(subset(pbc, select = c("snp","gene")))
+pbc_snp_gene_disease$disease <- "pbc"
+pso_snp_gene_disease <- unique(subset(pso, select = c("snp","gene")))
+pso_snp_gene_disease$disease <- "pso"
+pa_snp_gene_disease <- unique(subset(pa, select = c("snp","gene")))
+pa_snp_gene_disease$disease <- "pa"
+ra_snp_gene_disease <- unique(subset(ra, select = c("snp","gene")))
+ra_snp_gene_disease$disease <- "ra"
+sjs_snp_gene_disease <- unique(subset(sjs, select = c("snp","gene")))
+sjs_snp_gene_disease$disease <- "sjs"
+sle_snp_gene_disease <- unique(subset(sle, select = c("snp","gene")))
+sle_snp_gene_disease$disease <- "sle"
+ssc_snp_gene_disease <- unique(subset(ssc, select = c("snp","gene")))
+ssc_snp_gene_disease$disease <- "ssc"
+t1d_snp_gene_disease <- unique(subset(t1d, select = c("snp","gene")))
+t1d_snp_gene_disease$disease <- "t1d"
+ulc_snp_gene_disease <- unique(subset(ulc, select = c("snp","gene")))
+ulc_snp_gene_disease$disease <- "ulc"
+vit_snp_gene_disease <- unique(subset(vit, select = c("snp","gene")))
+vit_snp_gene_disease$disease <- "vit"
+
+## Row bind all the dataframes into single dataframe
+
+all_disease <- rbind(alo_snp_gene_disease, as_snp_gene_disease, ced_snp_gene_disease, crd_snp_gene_disease,
+                     ee_snp_gene_disease, jia_snp_gene_disease, grd_snp_gene_disease, ms_snp_gene_disease,
+                     pbc_snp_gene_disease, pso_snp_gene_disease, pa_snp_gene_disease, ra_snp_gene_disease,
+                     sjs_snp_gene_disease, sle_snp_gene_disease, ssc_snp_gene_disease, t1d_snp_gene_disease,
+                     ulc_snp_gene_disease, vit_snp_gene_disease)
+
+## aggregate disease based on snps 
+
+snp_agg1 <- aggregate(disease~snp, all_disease, function(x) paste(sort(unique(x)), collapse=","))
+
+## to get the number of diseases associated with each snp
+
+snp_agg1_len <- aggregate(disease~snp, all_disease, function(x) length(unique(x)))
+names(snp_agg1_len)[2] = "len_of_disease"
+
+## Merge the above two data frames
+
+snp_merged <- merge(snp_agg1, snp_agg1_len, by = "snp")
+
+## To find the pleiotropic snps between diseases
+
+shared_snps <-  snp_merged[snp_merged$len_of_disease >= 2,]
+
+## To find the non-pleiotropic snps between diseases
+
+unique_snps <- snp_merged[snp_merged$len_of_disease == 1,]
+
+## To find the total number of genes regulated by pleiotropic snps
+
+genes_by_shared_snps <- merge(shared_snps, all_disease, by = "snp")
+print(length(unique(genes_by_shared_snps$gene))) 
+print(length(unique(genes_by_shared_snps$snp))) 
+
+## To find the total number of genes regulated by non-pleiotropic snps
+
+genes_by_unique_snps <- merge(unique_snps, all_disease, by = "snp")
+print(length(unique(genes_by_unique_snps$gene))) 
+print(length(unique(genes_by_unique_snps$snp)))
+
+## To find the number of genes (i.e., identical) regulated only by the pleiotropic snps
+
+genes_only_by_shared_snps <- data.table(setdiff(genes_by_shared_snps$gene, genes_by_unique_snps$gene)) 
+
+## To find the number of genes (i.e., shared) regulated by both pleiotropic and non-pleiotropic snps
+
+genes_by_unique_and_shared_snps <- data.table(intersect(genes_by_shared_snps$gene, genes_by_unique_snps$gene))  
+
+## To find the number of genes (i.e., unique) regulated only by non-pleiotropic snps
+
+genes_only_by_unique_snps <- data.table(setdiff(genes_by_unique_snps$gene, genes_by_shared_snps$gene)) 
+
+```
+
+```{r}
+
+## Figure 1C
+
+alo_gene_type <- subset(alo, select = c("gene", "interaction_type"))
+as_gene_type <- subset(as, select = c("gene", "interaction_type"))
+ced_gene_type <- subset(ced, select = c("gene", "interaction_type"))
+crd_gene_type <- subset(crd, select = c("gene", "interaction_type"))
+ee_gene_type <- subset(ee, select = c("gene", "interaction_type"))
+grd_gene_type <- subset(grd, select = c("gene", "interaction_type"))
+jia_gene_type <- subset(jia, select = c("gene", "interaction_type"))
+ms_gene_type <- subset(ms, select = c("gene", "interaction_type"))
+pa_gene_type <- subset(pa, select = c("gene", "interaction_type"))
+pbc_gene_type <- subset(pbc, select = c("gene", "interaction_type"))
+pso_gene_type <- subset(pso, select = c("gene", "interaction_type"))
+ra_gene_type <- subset(ra, select = c("gene", "interaction_type"))
+sjs_gene_type <- subset(sjs, select = c("gene", "interaction_type"))
+sle_gene_type <- subset(sle, select = c("gene", "interaction_type"))
+ssc_gene_type <- subset(ssc, select = c("gene", "interaction_type"))
+t1d_gene_type <- subset(t1d, select = c("gene", "interaction_type"))
+ulc_gene_type <- subset(ulc, select = c("gene", "interaction_type"))
+vit_gene_type <- subset(vit, select = c("gene", "interaction_type"))
+
+## Combine the dataframe 
+
+all_disease_gene_type <- unique(rbind(alo_gene_type, as_gene_type, ced_gene_type, crd_gene_type, ee_gene_type,
+                                      grd_gene_type, jia_gene_type, ms_gene_type, pa_gene_type, pbc_gene_type,
+                                      pso_gene_type, ra_gene_type, sjs_gene_type, sle_gene_type, ssc_gene_type,
+                                      t1d_gene_type, ulc_gene_type, vit_gene_type))
+
+all_disease_gene_type$interaction_type <- gsub("Trans-intrachromosomal", "Trans", all_disease_gene_type$interaction_type)
+all_disease_gene_type$interaction_type <- gsub("Trans-interchromosomal", "Trans", all_disease_gene_type$interaction_type)
+
+## To find if a gene is regulated in cis, trans or both cis and trans.
+
+all_disease_type_aggr <- aggregate(interaction_type~gene, all_disease_gene_type, function(x) paste(sort(unique(x)), collapse=","))
+
+## Count the number of cis, trans and cis and trans interactions
+
+all_disease_type_aggr$count <- table(all_disease_type_aggr$interaction_type)[all_disease_type_aggr$interaction_type]
+
+## Plot the result
+
+pdf("../../images/figure1c.pdf", width = 6, height = 5)
+col <- c("orange", "darkblue", "forestgreen")
+ggplot(all_disease_type_aggr, aes(x = interaction_type, fill = interaction_type)) +
+  geom_bar(aes(y=..count../../sum(..count..)), width = 0.5) +
+  geom_text(aes(label = paste0("N = ", ..count..), y = ..count../../sum(..count..)), stat= "count", vjust = -0.5, size = 3.3) +
+  scale_fill_manual(values = col) +
+  scale_y_continuous(labels = scales::percent_format(), expand = c(0,0), limits = c(0, 0.6), breaks = seq(0, 0.6, by = 0.2)) +
+  scale_x_discrete(expand = c(0.2,0.2))+
+  ylab("Proportion of genes (%)") +
+  xlab("")+
+  theme_light() +
+  theme(legend.position="none",
+        axis.text.y = element_text(colour = "black"),
+        axis.text.x = element_text(colour = "black")) 
+dev.off()
+```
+
+```{r message=F}
+## Figure 1D
+
+alo_few <- unique(subset(alo, select = c("gene", "tissue", "interaction_type")))
+as_few <- unique(subset(as, select = c("gene", "tissue", "interaction_type")))
+ced_few <- unique(subset(ced, select = c("gene", "tissue", "interaction_type")))
+crd_few <- unique(subset(crd, select = c("gene", "tissue", "interaction_type")))
+ee_few <- unique(subset(ee, select = c("gene", "tissue", "interaction_type")))
+grd_few <- unique(subset(grd, select = c("gene", "tissue", "interaction_type")))
+jia_few <- unique(subset(jia, select = c("gene", "tissue", "interaction_type")))
+ms_few <- unique(subset(ms, select = c("gene", "tissue", "interaction_type")))
+pa_few <- unique(subset(pa, select = c("gene", "tissue", "interaction_type")))
+pbc_few <- unique(subset(pbc, select = c("gene", "tissue", "interaction_type")))
+pso_few <- unique(subset(pso, select = c("gene", "tissue", "interaction_type")))
+ra_few <- unique(subset(ra, select = c("gene", "tissue", "interaction_type")))
+sjs_few <- unique(subset(sjs, select = c("gene", "tissue", "interaction_type")))
+sle_few <- unique(subset(sle, select = c("gene", "tissue", "interaction_type")))
+ssc_few <- unique(subset(ssc, select = c("gene", "tissue", "interaction_type")))
+t1d_few <- unique(subset(t1d, select = c("gene", "tissue", "interaction_type")))
+ulc_few <- unique(subset(ulc, select = c("gene", "tissue", "interaction_type")))
+vit_few <- unique(subset(vit, select = c("gene", "tissue", "interaction_type")))
+
+## Combine all dataframes into one
+
+gene_tissue_type_all <- unique(rbind(alo_few,as_few,ced_few,crd_few,ee_few,grd_few,jia_few,ms_few,pa_few,pbc_few,pso_few,ra_few,sjs_few,sle_few,ssc_few,t1d_few,ulc_few,vit_few))
+
+## rename both trans_interchromosomal and trans-intrachromosomal interactions as "Trans"
+
+gene_tissue_type_all$interaction_type <- gsub("Trans-intrachromosomal", "Trans", gene_tissue_type_all$interaction_type)
+gene_tissue_type_all$interaction_type <- gsub("Trans-interchromosomal", "Trans", gene_tissue_type_all$interaction_type)
+
+## aggregate interaction type according to genes
+
+gene_aggr_type_all <- aggregate(interaction_type~gene, gene_tissue_type_all, function(x) paste(sort(unique(x)), collapse=","))
+
+## aggregate tissues according to genes
+
+gene_aggr_tissue_all <- aggregate(tissue~gene, gene_tissue_type_all, function(x) paste(sort(unique(x)), collapse=","))
+
+## to get the number of tissues per gene
+
+gene_aggr_tissue_all$no_of_tissues_per_gene <- sapply(strsplit(gene_aggr_tissue_all$tissue, ","), function(x) length(unique(x)))
+
+## count number of genes in 1 tissue, 2 tissues etc.. to 49 tissues and store it to "count_of_genes"
+
+gene_aggr_tissue_all <- gene_aggr_tissue_all %>% group_by(no_of_tissues_per_gene) %>% mutate("count_of_genes" = length(unique(gene)))
+
+## merge interaction_type aggregated and tissue aggregated dataframes
+
+genes_tissues_type_to_plot <- merge(gene_aggr_type_all, gene_aggr_tissue_all, by = "gene")
+
+genes_tissues_type_to_plot$tissue_count_to_plot <- ifelse(genes_tissues_type_to_plot$no_of_tissues_per_gene > 5, ">5", genes_tissues_type_to_plot$no_of_tissues_per_gene) 
+
+pdf("../../images/figure1d.pdf", width = 6, height = 5)
+col <- c("#e0b225", "#597093", "#518d40")
+ggplot(genes_tissues_type_to_plot, aes(x = factor(tissue_count_to_plot, levels=c("1", "2", "3", "4", "5", ">5")), y = count_of_genes, fill = interaction_type)) +
+  geom_bar(aes(y=..count../../sum(..count..)), width = 0.5) +
+  #geom_text(aes(label = paste0("N=", ..count..), y = ..count../../sum(..count..)), stat= "count", vjust = -0.5, size = 3.3) +
+  scale_fill_manual(values = col) +
+  scale_y_continuous(labels = scales::percent_format(), expand = c(0,0), limits = c(0, 0.7), breaks = seq(0, 0.7, by = 0.2)) +
+  scale_x_discrete(expand = c(0.1,0.1))+
+  ylab("Proportion of genes (%)")+
+  xlab("No of tissues")+
+  theme_light()+
+  theme(legend.position="none",
+        axis.text.y = element_text(colour = "black"),
+        axis.text.x = element_text(colour = "black"))
+dev.off()
+```
+
+```{r message=F}
+
+## Figure 3. Shared genes display predominant role in AiD modules. 
+
+## Figure 3A
+
+## Load required packages
+
+library(tidyr)
+library(heatmaply)
+library(pheatmap)
+
+## Load data to plot heatmap of proportions of diseases across clusters
+
+c73 <- read.delim("../../data/cluster_heatmap/module14_p73_data.txt", sep = "\t", header = T)
+c79 <- read.delim("../../data/cluster_heatmap/module10_p79_data.txt", sep = "\t", header = T)
+c122 <- read.delim("../../data/cluster_heatmap/module9_p122_data.txt", sep = "\t", header = T)
+c123 <- read.delim("../../data/cluster_heatmap/module11_p123_data.txt", sep = "\t", header = T)
+c150 <- read.delim("../../data/cluster_heatmap/module13_p150_data.txt", sep = "\t", header = T)
+c164 <- read.delim("../../data/cluster_heatmap/module3_p164_data.txt", sep = "\t", header = T)
+c170 <- read.delim("../../data/cluster_heatmap/module8_p170_data.txt", sep = "\t", header = T)
+c171 <- read.delim("../../data/cluster_heatmap/module4_p171_data.txt", sep = "\t", header = T)
+c177 <- read.delim("../../data/cluster_heatmap/module5_p177_data.txt", sep = "\t", header = T)
+c194 <- read.delim("../../data/cluster_heatmap/module6_p194_data.txt", sep = "\t", header = T)
+c216 <- read.delim("../../data/cluster_heatmap/module1_p216_data.txt", sep = "\t", header = T)
+c220 <- read.delim("../../data/cluster_heatmap/module12_p220_data.txt", sep = "\t", header = T)
+c345 <- read.delim("../../data/cluster_heatmap/module2_p345_data.txt", sep = "\t", header = T)
+c472 <- read.delim("../../data/cluster_heatmap/module7_p472_data.txt", sep = "\t", header = T)
+
+## Subset required columns to plot
+
+c73_df <- unique(subset(c73, select = c(disease,prop,group)))
+c79_df <- unique(subset(c79, select = c(disease,prop,group)))
+c122_df <- unique(subset(c122, select = c(disease,prop,group)))
+c123_df <- unique(subset(c123, select = c(disease,prop,group)))
+c150_df <- unique(subset(c150, select = c(disease,prop,group)))
+c164_df <- unique(subset(c164, select = c(disease,prop,group)))
+c170_df <- unique(subset(c170, select = c(disease,prop,group)))
+c171_df <- unique(subset(c171, select = c(disease,prop,group)))
+c177_df <- unique(subset(c177, select = c(disease,prop,group)))
+c194_df <- unique(subset(c194, select = c(disease,prop,group)))
+c216_df <- unique(subset(c216, select = c(disease,prop,group)))
+c220_df <- unique(subset(c220, select = c(disease,prop,group)))
+c345_df <- unique(subset(c345, select = c(disease,prop,group)))
+c472_df <- unique(subset(c472, select = c(disease,prop,group)))
+
+## Bind all dataframes into one
+
+all_group <- rbind(c73_df,c79_df,c122_df,c123_df,c150_df,c164_df,c170_df,c171_df,c177_df,c194_df,c216_df,c220_df,c345_df,c472_df)
+
+## Create matrix from the dataframe 
+
+all_group_matrix <- spread(all_group, group, prop)
+rownames(all_group_matrix) <- all_group_matrix[, 1]
+all_group_matrix <- all_group_matrix[-1]
+rownames(all_group_matrix) <- toupper(rownames(all_group_matrix))
+
+## Plot heatmap 
+
+pdf("../../images/figure3a.pdf", width = 4, height = 3)
+pheatmap(normalize(all_group_matrix),
+         cluster_rows = T,
+         cluster_cols = T,
+         na_col = "white",
+         angle_col = 45,
+         colorRampPalette(c("#fff7bc", "#d95f0e"))(100),
+         fontsize = 5,
+         border_color = FALSE) 
+dev.off()
+
+```
+
+```{r message=FALSE}
+
+## Figure 3B
+
+## Load required packages
+
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+
+## Load gene map file 
+
+map <- read.delim("../../data/map_file_short.txt", sep = "\t", header = T)
+names(map)[1] <- "intersection"
+
+## To replace individual disease names by common name "unique"
+
+map$disease_new <- ifelse(map$disease != "shared", "unique", map$disease)
+map$disease_new <- ifelse(map$disease == "identical", "identical", map$disease_new)
+
+## Load pathway enrichment results of each cluster
+
+c216_pathways <- read.delim("../../results/pathways_results/module1_p216_pathways.txt", header = T, sep = "\t")
+c345_pathways <- read.delim("../../results/pathways_results/module2_p345_pathways.txt", header = T, sep = "\t")
+c164_pathways <- read.delim("../../results/pathways_results/module3_p164_pathways.txt", header = T, sep = "\t")
+c171_pathways <- read.delim("../../results/pathways_results/module4_p171_pathways.txt", header = T, sep = "\t")
+c177_pathways <- read.delim("../../results/pathways_results/module5_p177_pathways.txt", header = T, sep = "\t")
+c194_pathways <- read.delim("../../results/pathways_results/module6_p194_pathways.txt", header = T, sep = "\t")
+c472_pathways <- read.delim("../../results/pathways_results/module7_p472_pathways.txt", header = T, sep = "\t")
+c170_pathways <- read.delim("../../results/pathways_results/module8_p170_pathways.txt", header = T, sep = "\t")
+c122_pathways <- read.delim("../../results/pathways_results/module9_p122_pathways.txt", header = T, sep = "\t")
+c79_pathways <- read.delim("../../results/pathways_results/module10_p79_pathways.txt", header = T, sep = "\t")
+c123_pathways <- read.delim("../../results/pathways_results/module11_p123_pathways.txt", header = T, sep = "\t")
+c220_pathways <- read.delim("../../results/pathways_results/module12_p220_pathways.txt", header = T, sep = "\t")
+c150_pathways <- read.delim("../../results/pathways_results/module13_p150_pathways.txt", header = T, sep = "\t")
+c73_pathways <- read.delim("../../results/pathways_results/module14_p73_pathways.txt", header = T, sep = "\t")
+
+## To get top 5 significantly enriched pathways according to the pvalue
+
+c216_ordered <- c216_pathways[order(c216_pathways$p_value),]
+c216_top5 <- head(c216_ordered,5)
+
+c345_ordered <- c345_pathways[order(c345_pathways$p_value),]
+c345_top5 <- head(c345_ordered,5)
+
+c164_ordered <- c164_pathways[order(c164_pathways$p_value),]
+c164_top5 <- head(c164_ordered,5)
+
+c171_ordered <- c171_pathways[order(c171_pathways$p_value),]
+c171_top5 <- head(c171_ordered,5)
+
+c177_ordered <- c177_pathways[order(c177_pathways$p_value),]
+c177_top5 <- head(c177_ordered,5)
+
+c194_ordered <- c194_pathways[order(c194_pathways$p_value),]
+c194_top5 <- head(c194_ordered,5)
+
+c472_ordered <- c472_pathways[order(c472_pathways$p_value),]
+c472_top5 <- head(c472_ordered,5)
+
+c170_ordered <- c170_pathways[order(c170_pathways$p_value),]
+c170_top5 <- head(c170_ordered,5)
+
+c122_ordered <- c122_pathways[order(c122_pathways$p_value),]
+c122_top5 <- head(c122_ordered,5)
+
+c79_ordered <- c79_pathways[order(c79_pathways$p_value),]
+c79_top5 <- head(c79_ordered,5)
+
+c123_ordered <- c123_pathways[order(c123_pathways$p_value),]
+c123_top5 <- head(c123_ordered,5)
+
+c220_ordered <- c220_pathways[order(c220_pathways$p_value),]
+c220_top5 <- head(c220_ordered,5)
+
+c150_ordered <- c150_pathways[order(c150_pathways$p_value),]
+c150_top5 <- head(c150_ordered,5)
+
+c73_ordered <- c73_pathways[order(c73_pathways$p_value),]
+c73_top5 <- head(c73_ordered,5)
+
+## To get rows with pathway results for each gene 
+
+c216_top5_genewise <- separate_rows(c216_top5, intersection, sep = ",")
+c345_top5_genewise <- separate_rows(c345_top5, intersection, sep = ",")
+c164_top5_genewise <- separate_rows(c164_top5, intersection, sep = ",")
+c171_top5_genewise <- separate_rows(c171_top5, intersection, sep = ",")
+c177_top5_genewise <- separate_rows(c177_top5, intersection, sep = ",")
+c194_top5_genewise <- separate_rows(c194_top5, intersection, sep = ",")
+c472_top5_genewise <- separate_rows(c472_top5, intersection, sep = ",")
+c170_top5_genewise <- separate_rows(c170_top5, intersection, sep = ",")
+c122_top5_genewise <- separate_rows(c122_top5, intersection, sep = ",")
+c79_top5_genewise <- separate_rows(c79_top5, intersection, sep = ",")
+c123_top5_genewise <- separate_rows(c123_top5, intersection, sep = ",")
+c220_top5_genewise <- separate_rows(c220_top5, intersection, sep = ",")
+c150_top5_genewise <- separate_rows(c150_top5, intersection, sep = ",")
+c73_top5_genewise <- separate_rows(c73_top5, intersection, sep = ",")
+
+## To get corresponding disease of the genes
+
+c216_disease <- merge(c216_top5_genewise, map, by = "intersection")
+c345_disease <- merge(c345_top5_genewise, map, by = "intersection")
+c164_disease <- merge(c164_top5_genewise, map, by = "intersection")
+c171_disease <- merge(c171_top5_genewise, map, by = "intersection")
+c177_disease <- merge(c177_top5_genewise, map, by = "intersection")
+c194_disease <- merge(c194_top5_genewise, map, by = "intersection")
+c472_disease <- merge(c472_top5_genewise, map, by = "intersection")
+c170_disease <- merge(c170_top5_genewise, map, by = "intersection")
+c122_disease <- merge(c122_top5_genewise, map, by = "intersection")
+c79_disease <- merge(c79_top5_genewise, map, by = "intersection")
+c123_disease <- merge(c123_top5_genewise, map, by = "intersection")
+c220_disease <- merge(c220_top5_genewise, map, by = "intersection")
+c150_disease <- merge(c150_top5_genewise, map, by = "intersection")
+c73_disease <- merge(c73_top5_genewise, map, by = "intersection")
+
+## Subset required columns to plot
+
+c216_subset <- unique(subset(c216_disease, select = c(intersection, disease_new)))
+c216_subset$module <- "Module1"
+
+c345_subset <- unique(subset(c345_disease, select = c(intersection, disease_new)))
+c345_subset$module <- "Module2"
+
+c164_subset <- unique(subset(c164_disease, select = c(intersection, disease_new)))
+c164_subset$module <- "Module3"
+
+c171_subset <- unique(subset(c171_disease, select = c(intersection, disease_new)))
+c171_subset$module <- "Module4"
+
+c177_subset <- unique(subset(c177_disease, select = c(intersection, disease_new)))
+c177_subset$module <- "Module5"
+
+c194_subset <- unique(subset(c194_disease, select = c(intersection, disease_new)))
+c194_subset$module <- "Module6"
+
+c472_subset <- unique(subset(c472_disease, select = c(intersection, disease_new)))
+c472_subset$module <- "Module7"
+
+c170_subset <- unique(subset(c170_disease, select = c(intersection, disease_new)))
+c170_subset$module <- "Module8"
+
+c122_subset <- unique(subset(c122_disease, select = c(intersection, disease_new)))
+c122_subset$module <- "Module9"
+
+c79_subset <- unique(subset(c79_disease, select = c(intersection, disease_new)))
+c79_subset$module <- "Module10"
+
+c123_subset <- unique(subset(c123_disease, select = c(intersection, disease_new)))
+c123_subset$module <- "Module11"
+
+c220_subset <- unique(subset(c220_disease, select = c(intersection, disease_new)))
+c220_subset$module <- "Module12"
+
+c150_subset <- unique(subset(c150_disease, select = c(intersection, disease_new)))
+c150_subset$module <- "Module13"
+
+c73_subset <- unique(subset(c73_disease, select = c(intersection, disease_new)))
+c73_subset$module <- "Module14"
+
+## Combine subsetted dataframe into one
+
+p <- rbind(c73_subset,c79_subset,c122_subset,c123_subset,c150_subset,c164_subset,c170_subset,c171_subset,c177_subset,c194_subset,c216_subset,c220_subset,c345_subset,c472_subset)
+
+## Plot the data
+
+module_order <- c("Module1","Module2","Module3","Module4","Module5","Module6","Module7","Module8","Module9","Module10","Module11","Module12","Module13","Module14")
+fill_order <- c("identical","shared","unique")
+col <- c("black", "gray","#f9ae06")
+
+df <- p %>% 
+  group_by(module, disease_new) %>% 
+  summarise(count = length(disease_new)) %>%
+  mutate(perc = (count/sum(count)), cumsum = cumsum(perc), label=ifelse(disease_new=="unique", paste0("N=", sum(count)),""))
+
+pdf("../../images/figure3b.pdf", width = 4, height = 3)
+ggplot(df, aes(x = factor(module, levels = module_order), y= perc, fill = factor(disease_new, levels = fill_order)))+
+  geom_bar(stat = "identity", position = "stack", width = 0.4) +
+  geom_text(aes(y=cumsum, label=label), vjust=-0.5, size = 2)+
+  scale_fill_manual(values = col) +
+  scale_x_discrete(expand = c(0.03,0.03))+
+  scale_y_continuous(labels = scales::percent_format(), expand = c(0,0), limits = c(0, 1.1), breaks = seq(0, 1.1, by = 0.2))+
+  ylab("Percentage of genes enriched in top 5 pathways") +
+  xlab("")+
+  theme_light() +
+  theme(legend.position= "bottom",
+        legend.title = element_blank(),
+        legend.direction = "horizontal",
+        legend.background = element_blank(),
+        axis.text.y = element_text(colour = "black", size = 5),
+        axis.text.x = element_text(colour = "black", angle = 45, hjust = 1, vjust = 1, size = 5),
+        axis.title = element_text(size = 6)) 
+dev.off()
+
+```
+
+```{r message=F}
+## Figure 3C
+
+##Load required packages
+
+library(dplyr)
+library(ggplot2)
+
+## Load gene map file 
+
+map <- read.delim("../../data/map_file_short.txt", sep = "\t", header = T)
+
+## Load centrality outputs
+
+c216_centrality_res <- read.delim("../../results/centrality_analysis_results/module1_p216/top10percent_genes_in_c216.txt", header = T,sep = "\t")
+c345_centrality_res <- read.delim("../../results/centrality_analysis_results/module2_p345/top10percent_genes_in_c345.txt", header = T,sep = "\t")
+c164_centrality_res <- read.delim("../../results/centrality_analysis_results/module3_p164/top10percent_genes_in_c164.txt", header = T,sep = "\t")
+c171_centrality_res <- read.delim("../../results/centrality_analysis_results/module4_p171/top10percent_genes_in_c171.txt", header = T,sep = "\t")
+c177_centrality_res <- read.delim("../../results/centrality_analysis_results/module5_p177/top10percent_genes_in_c177.txt", header = T,sep = "\t")
+c194_centrality_res <- read.delim("../../results/centrality_analysis_results/module6_p194/top10percent_genes_in_c194.txt", header = T,sep = "\t")
+c472_centrality_res <- read.delim("../../results/centrality_analysis_results/module7_p472/top10percent_genes_in_c472.txt", header = T,sep = "\t")
+c170_centrality_res <- read.delim("../../results/centrality_analysis_results/module8_p170/top10percent_genes_in_c170.txt", header = T,sep = "\t")
+c122_centrality_res <- read.delim("../../results/centrality_analysis_results/module9_p122/top10percent_genes_in_c122.txt", header = T,sep = "\t")
+c79_centrality_res <- read.delim("../../results/centrality_analysis_results/module10_p79/top10percent_genes_in_c79.txt", header = T,sep = "\t")
+c123_centrality_res <- read.delim("../../results/centrality_analysis_results/module11_p123/top10percent_genes_in_c123.txt", header = T,sep = "\t")
+c220_centrality_res <- read.delim("../../results/centrality_analysis_results/module12_p220/top10percent_genes_in_c220.txt", header = T,sep = "\t")
+c150_centrality_res <- read.delim("../../results/centrality_analysis_results/module13_p150/top10percent_genes_in_c150.txt", header = T,sep = "\t")
+c73_centrality_res <- read.delim("../../results/centrality_analysis_results/module14_p73/top10percent_genes_in_c73.txt", header = T,sep = "\t")
+
+
+## Subset only central gene's IDs
+
+c216_centrality_res_subset <- subset(c216_centrality_res, select = id)
+c345_centrality_res_subset <- subset(c345_centrality_res, select = id)
+c164_centrality_res_subset <- subset(c164_centrality_res, select = id)
+c171_centrality_res_subset <- subset(c171_centrality_res, select = id)
+c177_centrality_res_subset <- subset(c177_centrality_res, select = id)
+c194_centrality_res_subset <- subset(c194_centrality_res, select = id)
+c472_centrality_res_subset <- subset(c472_centrality_res, select = id)
+c170_centrality_res_subset <- subset(c170_centrality_res, select = id)
+c122_centrality_res_subset <- subset(c122_centrality_res, select = id)
+c79_centrality_res_subset <- subset(c79_centrality_res, select = id)
+c123_centrality_res_subset <- subset(c123_centrality_res, select = id)
+c220_centrality_res_subset <- subset(c220_centrality_res, select = id)
+c150_centrality_res_subset <- subset(c150_centrality_res, select = id)
+c73_centrality_res_subset <- subset(c73_centrality_res, select = id)
+
+## To get disease information of the central genes
+
+c216_central_genes <- merge(c216_centrality_res_subset,map,by="id")
+c345_central_genes <- merge(c345_centrality_res_subset,map,by="id")
+c164_central_genes <- merge(c164_centrality_res_subset,map,by="id")
+c171_central_genes <- merge(c171_centrality_res_subset,map,by="id")
+c177_central_genes <- merge(c177_centrality_res_subset,map,by="id")
+c194_central_genes <- merge(c194_centrality_res_subset,map,by="id")
+c472_central_genes <- merge(c472_centrality_res_subset,map,by="id")
+c170_central_genes <- merge(c170_centrality_res_subset,map,by="id")
+c122_central_genes <- merge(c122_centrality_res_subset,map,by="id")
+c79_central_genes <- merge(c79_centrality_res_subset,map,by="id")
+c123_central_genes <- merge(c123_centrality_res_subset,map,by="id")
+c220_central_genes <- merge(c220_centrality_res_subset,map,by="id")
+c150_central_genes <- merge(c150_centrality_res_subset,map,by="id")
+c73_central_genes <- merge(c73_centrality_res_subset,map,by="id")
+
+
+c216_central_genes$new_disease <- ifelse(c216_central_genes$disease != "shared", "unique", c216_central_genes$disease)
+c216_central_genes$new_disease <- ifelse(c216_central_genes$disease == "identical", "identical", c216_central_genes$new_disease)
+
+c345_central_genes$new_disease <- ifelse(c345_central_genes$disease != "shared", "unique", c345_central_genes$disease)
+c345_central_genes$new_disease <- ifelse(c345_central_genes$disease == "identical", "identical", c345_central_genes$new_disease)
+
+c164_central_genes$new_disease <- ifelse(c164_central_genes$disease != "shared", "unique", c164_central_genes$disease)
+c164_central_genes$new_disease <- ifelse(c164_central_genes$disease == "identical", "identical", c164_central_genes$new_disease)
+
+c171_central_genes$new_disease <- ifelse(c171_central_genes$disease != "shared", "unique", c171_central_genes$disease)
+c171_central_genes$new_disease <- ifelse(c171_central_genes$disease == "identical", "identical", c171_central_genes$new_disease)
+
+c177_central_genes$new_disease <- ifelse(c177_central_genes$disease != "shared", "unique", c177_central_genes$disease)
+c177_central_genes$new_disease <- ifelse(c177_central_genes$disease == "identical", "identical", c177_central_genes$new_disease)
+
+c194_central_genes$new_disease <- ifelse(c194_central_genes$disease != "shared", "unique", c194_central_genes$disease)
+c194_central_genes$new_disease <- ifelse(c194_central_genes$disease == "identical", "identical", c194_central_genes$new_disease)
+
+c472_central_genes$new_disease <- ifelse(c472_central_genes$disease != "shared", "unique", c472_central_genes$disease)
+c472_central_genes$new_disease <- ifelse(c472_central_genes$disease == "identical", "identical", c472_central_genes$new_disease)
+
+c170_central_genes$new_disease <- ifelse(c170_central_genes$disease != "shared", "unique", c170_central_genes$disease)
+c170_central_genes$new_disease <- ifelse(c170_central_genes$disease == "identical", "identical", c170_central_genes$new_disease)
+
+c122_central_genes$new_disease <- ifelse(c122_central_genes$disease != "shared", "unique", c122_central_genes$disease)
+c122_central_genes$new_disease <- ifelse(c122_central_genes$disease == "identical", "identical", c122_central_genes$new_disease)
+
+c79_central_genes$new_disease <- ifelse(c79_central_genes$disease != "shared", "unique", c79_central_genes$disease)
+c79_central_genes$new_disease <- ifelse(c79_central_genes$disease == "identical", "identical", c79_central_genes$new_disease)
+
+c123_central_genes$new_disease <- ifelse(c123_central_genes$disease != "shared", "unique", c123_central_genes$disease)
+c123_central_genes$new_disease <- ifelse(c123_central_genes$disease == "identical", "identical", c123_central_genes$new_disease)
+
+c220_central_genes$new_disease <- ifelse(c220_central_genes$disease != "shared", "unique", c220_central_genes$disease)
+c220_central_genes$new_disease <- ifelse(c220_central_genes$disease == "identical", "identical", c220_central_genes$new_disease)
+
+c150_central_genes$new_disease <- ifelse(c150_central_genes$disease != "shared", "unique", c150_central_genes$disease)
+c150_central_genes$new_disease <- ifelse(c150_central_genes$disease == "identical", "identical", c150_central_genes$new_disease)
+
+c73_central_genes$new_disease <- ifelse(c73_central_genes$disease != "shared", "unique", c73_central_genes$disease)
+c73_central_genes$new_disease <- ifelse(c73_central_genes$disease == "identical", "identical", c73_central_genes$new_disease)
+
+
+## Add a variable to distinguish modules
+
+c216_central_genes$group <- "Module1"
+c345_central_genes$group <- "Module2"
+c164_central_genes$group <- "Module3"
+c171_central_genes$group <- "Module4"
+c177_central_genes$group <- "Module5"
+c194_central_genes$group <- "Module6"
+c472_central_genes$group <- "Module7"
+c170_central_genes$group <- "Module8"
+c122_central_genes$group <- "Module9"
+c79_central_genes$group <- "Module10"
+c123_central_genes$group <- "Module11"
+c220_central_genes$group <- "Module12"
+c150_central_genes$group <- "Module13"
+c73_central_genes$group <- "Module14"
+
+## Combine all dataframes into one
+
+df <- rbind(c73_central_genes,c79_central_genes,c122_central_genes,c123_central_genes,c150_central_genes,c164_central_genes,c170_central_genes,c171_central_genes,c177_central_genes,c194_central_genes,c216_central_genes,c220_central_genes,c345_central_genes,c472_central_genes)
+
+
+## Calculate proportion of each group of disease (i.e., unique, shared, identical)
+
+d2 <- df %>% 
+  group_by(group, new_disease) %>% 
+  summarise(count = length(new_disease)) %>% 
+  mutate(perc = (count/sum(count)), cumsum = cumsum(perc), label=ifelse(new_disease=="unique", paste0("N=", sum(count)),""))
+
+## Plot the data
+
+module_order <- c("Module1","Module2","Module3","Module4","Module5","Module6","Module7","Module8","Module9","Module10","Module11","Module12","Module13","Module14")
+fill_order <- c("identical","shared","unique")
+col <- c("black", "gray","#f9ae06")
+
+pdf("../../images/figure3c.pdf", width = 4, height = 3)
+ggplot(d2, aes(x = factor(group, levels = module_order), y= perc, fill = factor(new_disease, levels = fill_order)))+
+  geom_bar(stat="identity", width = 0.4) +
+  geom_text(aes(y=cumsum, label=label), vjust=-0.5, size = 2)+
+  scale_y_continuous(labels = scales::percent_format(), expand = c(0,0), limits = c(0, 1.1), breaks = seq(0, 1.1, by = 0.2)) +
+  scale_fill_manual(values = col) +
+  labs(x = "", y = "Percentage of central genes (%)",fill = "") +
+  theme_light()+
+  theme(axis.text.x = element_text(colour = "black", angle = 45, vjust = 1, hjust = 1, size = 6),
+        axis.text.y = element_text(colour = "black", size = 6),
+        axis.title.y = element_text(colour = "black", size = 6),
+        legend.text = element_text(colour = "black", size = 6),
+        legend.title = element_text(colour = "black", size = 7),
+        legend.key.size = unit(0.5, "lines"),
+        legend.position = "bottom")
+dev.off()
+
+```
+
+```{r message=F}
+
+## Figure 3D
+
+## Load required packages
+
+library(ggplot2)
+
+## Load dgi results of the clusters (input file should have gene names and the drug targets)
+
+mod1_dgi_res <- read.delim("../../results/druggability_results/mod1_approved_res.txt", sep = "\t", header = T)
+mod2_dgi_res <- read.delim("../../results/druggability_results/mod2_approved_res.txt", sep = "\t", header = T)
+mod3_dgi_res <- read.delim("../../results/druggability_results/mod3_approved_res.txt", sep = "\t", header = T)
+mod4_dgi_res <- read.delim("../../results/druggability_results/mod4_approved_res.txt", sep = "\t", header = T)
+mod5_dgi_res <- read.delim("../../results/druggability_results/mod5_approved_res.txt", sep = "\t", header = T)
+mod6_dgi_res <- read.delim("../../results/druggability_results/mod6_approved_res.txt", sep = "\t", header = T)
+mod7_dgi_res <- read.delim("../../results/druggability_results/mod7_approved_res.txt", sep = "\t", header = T)
+mod8_dgi_res <- read.delim("../../results/druggability_results/mod8_approved_res.txt", sep = "\t", header = T)
+mod9_dgi_res <- read.delim("../../results/druggability_results/mod9_approved_res.txt", sep = "\t", header = T)
+#mod10_dgi_res <- read.delim("../../results/druggability_results/mod10_approved_res.txt", sep = "\t", header = T) # No druggable genes in this cluster
+mod11_dgi_res <- read.delim("../../results/druggability_results/mod11_approved_res.txt", sep = "\t", header = T)
+mod12_dgi_res <- read.delim("../../results/druggability_results/mod12_approved_res.txt", sep = "\t", header = T)
+mod13_dgi_res <- read.delim("../../results/druggability_results/mod13_approved_res.txt", sep = "\t", header = T)
+mod14_dgi_res <- read.delim("../../results/druggability_results/mod14_approved_res.txt", sep = "\t", header = T)
+
+## To find the number of drugs targetting each gene
+
+mod1_drug_len <- aggregate(drug~gene, mod1_dgi_res, function(x) length(unique(x)))
+mod2_drug_len <- aggregate(drug~gene, mod2_dgi_res, function(x) length(unique(x)))
+mod3_drug_len <- aggregate(drug~gene, mod3_dgi_res, function(x) length(unique(x)))
+mod4_drug_len <- aggregate(drug~gene, mod4_dgi_res, function(x) length(unique(x)))
+mod5_drug_len <- aggregate(drug~gene, mod5_dgi_res, function(x) length(unique(x)))
+mod6_drug_len <- aggregate(drug~gene, mod6_dgi_res, function(x) length(unique(x)))
+mod7_drug_len <- aggregate(drug~gene, mod7_dgi_res, function(x) length(unique(x)))
+mod8_drug_len <- aggregate(drug~gene, mod8_dgi_res, function(x) length(unique(x)))
+mod9_drug_len <- aggregate(drug~gene, mod9_dgi_res, function(x) length(unique(x)))
+mod11_drug_len <- aggregate(drug~gene, mod11_dgi_res, function(x) length(unique(x)))
+mod12_drug_len <- aggregate(drug~gene, mod12_dgi_res, function(x) length(unique(x)))
+mod13_drug_len <- aggregate(drug~gene, mod13_dgi_res, function(x) length(unique(x)))
+mod14_drug_len <- aggregate(drug~gene, mod14_dgi_res, function(x) length(unique(x)))
+
+## Load the details of the central genes in each cluster
+
+mod1_cg_info <- read.delim("../../results/centrality_analysis_results/module1_p216/c216_central_genes_details.txt", sep = "\t", header = T)
+names(mod1_cg_info)[2] <- "gene"
+
+mod2_cg_info <- read.delim("../../results/centrality_analysis_results/module2_p345/c345_central_genes_details.txt", sep = "\t", header = T)
+names(mod2_cg_info)[2] <- "gene"
+
+mod3_cg_info <- read.delim("../../results/centrality_analysis_results/module3_p164/c164_central_genes_details.txt", sep = "\t", header = T)
+names(mod3_cg_info)[2] <- "gene"
+
+mod4_cg_info <- read.delim("../../results/centrality_analysis_results/module4_p171/c171_central_genes_details.txt", sep = "\t", header = T)
+names(mod4_cg_info)[2] <- "gene"
+
+mod5_cg_info <- read.delim("../../results/centrality_analysis_results/module5_p177/c177_central_genes_details.txt", sep = "\t", header = T)
+names(mod5_cg_info)[2] <- "gene"
+
+mod6_cg_info <- read.delim("../../results/centrality_analysis_results/module6_p194/c194_central_genes_details.txt", sep = "\t", header = T)
+names(mod6_cg_info)[2] <- "gene"
+
+mod7_cg_info <- read.delim("../../results/centrality_analysis_results/module7_p472/c472_central_genes_details.txt", sep = "\t", header = T)
+names(mod7_cg_info)[2] <- "gene"
+
+mod8_cg_info <- read.delim("../../results/centrality_analysis_results/module8_p170/c170_central_genes_details.txt", sep = "\t", header = T)
+names(mod8_cg_info)[2] <- "gene"
+
+mod9_cg_info <- read.delim("../../results/centrality_analysis_results/module9_p122/c122_central_genes_details.txt", sep = "\t", header = T)
+names(mod9_cg_info)[2] <- "gene"
+
+mod11_cg_info <- read.delim("../../results/centrality_analysis_results/module11_p123/c123_central_genes_details.txt", sep = "\t", header = T)
+names(mod11_cg_info)[2] <- "gene"
+
+mod12_cg_info <- read.delim("../../results/centrality_analysis_results/module12_p220/c220_central_genes_details.txt", sep = "\t", header = T)
+names(mod12_cg_info)[2] <- "gene"
+
+mod13_cg_info <- read.delim("../../results/centrality_analysis_results/module13_p150/c150_central_genes_details.txt", sep = "\t", header = T)
+names(mod13_cg_info)[2] <- "gene"
+
+mod14_cg_info <- read.delim("../../results/centrality_analysis_results/module14_p73/c73_central_genes_details.txt", sep = "\t", header = T)
+names(mod14_cg_info)[2] <- "gene"
+
+
+## Merge the datadrames to get all the details of genes 
+
+mod1_drug_len_with_info <- merge(mod1_drug_len, mod1_cg_info, by = "gene")
+mod1_drug_len_with_info$Module <- "Module1"
+
+mod2_drug_len_with_info <- merge(mod2_drug_len, mod2_cg_info, by = "gene")
+mod2_drug_len_with_info$Module <- "Module2"
+
+mod3_drug_len_with_info <- merge(mod3_drug_len, mod3_cg_info, by = "gene")
+mod3_drug_len_with_info$Module <- "Module3"
+
+mod4_drug_len_with_info <- merge(mod4_drug_len, mod4_cg_info, by = "gene")
+mod4_drug_len_with_info$Module <- "Module4"
+
+mod5_drug_len_with_info <- merge(mod5_drug_len, mod5_cg_info, by = "gene")
+mod5_drug_len_with_info$Module <- "Module5"
+
+mod6_drug_len_with_info <- merge(mod6_drug_len, mod6_cg_info, by = "gene")
+mod6_drug_len_with_info$Module <- "Module6"
+
+mod7_drug_len_with_info <- merge(mod7_drug_len, mod7_cg_info, by = "gene")
+mod7_drug_len_with_info$Module <- "Module7"
+
+mod8_drug_len_with_info <- merge(mod8_drug_len, mod8_cg_info, by = "gene")
+mod8_drug_len_with_info$Module <- "Module8"
+
+mod9_drug_len_with_info <- merge(mod9_drug_len, mod9_cg_info, by = "gene")
+mod9_drug_len_with_info$Module <- "Module9"
+
+mod11_drug_len_with_info <- merge(mod11_drug_len, mod11_cg_info, by = "gene")
+mod11_drug_len_with_info$Module <- "Module11"
+
+mod12_drug_len_with_info <- merge(mod12_drug_len, mod12_cg_info, by = "gene")
+mod12_drug_len_with_info$Module <- "Module12"
+
+mod13_drug_len_with_info <- merge(mod13_drug_len, mod13_cg_info, by = "gene")
+mod13_drug_len_with_info$Module <- "Module13"
+
+mod14_drug_len_with_info <- merge(mod14_drug_len, mod14_cg_info, by = "gene")
+mod14_drug_len_with_info$Module <- "Module14"
+
+## Combine the dataframes
+
+data <- rbind(mod1_drug_len_with_info, mod2_drug_len_with_info, mod3_drug_len_with_info, mod4_drug_len_with_info, mod5_drug_len_with_info, mod6_drug_len_with_info, mod7_drug_len_with_info, mod8_drug_len_with_info, mod9_drug_len_with_info, mod11_drug_len_with_info, mod12_drug_len_with_info, mod13_drug_len_with_info, mod14_drug_len_with_info)
+
+
+## Plot the data
+
+dis_col <- c("#59BA4B","#4E84C4","black","#58C8E8","#BB4A9A","#BFD74A","#F7BED2","#46988F","#D0BCDB","#A9A9A8","#9A6427","#7F1518","#FBF0A2","#7F8033","#404EA0","#CBA8A2")
+
+data$Module <- factor(data$Module, levels=c("Module1","Module2","Module3","Module4","Module5","Module6","Module7","Module8","Module9","Module11","Module12","Module13","Module14"))
+
+pdf("../../images/figure3d.pdf", width = 4, height = 3)
+ggplot(data, aes(x=Module, y=drug, color = disease)) +
+  geom_point(position = position_jitter(w = 0.18, h = 0.5), size=1.7) +
+  scale_color_manual(values = dis_col) +
+  geom_text(aes(label=ifelse(drug>20,as.character(gene),'')),hjust=-0.2,vjust=-0.2, size = 2, color = "black")+
+  theme_linedraw() +
+  scale_y_continuous(expand = c(0,0), limits = c(0, 120), breaks = seq(0, 110, by = 10)) +
+  labs(x="", y="No of drugs") +
+  theme(axis.text.y = element_text(size = 6, lineheight = 0.7),
+        axis.text.x = element_text(size = 6, angle = 45, hjust = 1),
+        axis.title.x = element_text(size = 6),
+        panel.grid = element_blank()) 
+dev.off()
+```
+
+```{r}
+## Figure 4. HLA genes are central to immune function rich module
+
+## Figure 4B
+
+## Load required packages
+
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+
+## Load gene ontology enrichemnt result of module_1
+
+c216_bp_res <- read.delim("../../results/go_results/mod1_c216_bp_ordered_res.txt", sep = "\t", header = T) # input is sorted according to p-values (lowest to highest)
+
+## Sentence case term name
+
+str_sub(c216_bp_res$term_name, 1, 1) <- str_sub(c216_bp_res$term_name, 1, 1) %>% str_to_upper()
+
+## Subset top 30 results 
+
+c216_bp_top30 <- head(c216_bp_res, 30)
+
+## To find the proportion of genes contribute to each term from the module
+
+data_c216 <- mutate(c216_bp_top30, ratio = (c216_bp_top30$intersection_size/216)*100)
+data_c216$ratio <- round(data_c216$ratio, digits = 2)
+
+pdf("../../images/figure_4b.pdf", width = 5, height = 4.5)
+ggplot(data_c216, aes(x = ratio, y = term_name, fill = -log10(p_value))) +
+  geom_bar(stat="identity", width = 0.6, position="stack") +
+  labs(x="Proportion of genes (%)", y = "") + 
+  geom_text(aes(label=intersection_size, vjust=0.4, hjust=-0.2), size = 1.3) +
+  scale_fill_continuous(low = "blue", high = "red", limits = c(10,40), breaks = seq(10,40,by =10)) +
+  scale_y_discrete(labels = function(y) str_wrap(y, width = 45)) +
+  scale_x_continuous(expand = c(0.0,0.0), limits = c(0,60), breaks = seq(0,60,by=10), labels = function(x) paste0(x)) +
+  theme_light()+
+  theme(axis.text.y = element_text(size = 4, lineheight = 0.8),
+        axis.text.x = element_text(size = 4),
+        axis.title.x = element_text(size = 5))
+dev.off()
+```
+
+```{r}
+
+## Figure 4C
+
+## Load required packages
+
+library(tidyverse)
+library(data.table)
+library(ggplot2)
+
+## Load pathway enrichment results
+
+c216_pathways <- read.delim("../../results/pathways_results/module1_p216_pathways.txt", header = T, sep = "\t")
+
+## To get genewise results 
+
+c216_pathways_genewise <- separate_rows(c216_pathways, intersection, sep = ",")
+
+## Subset required columns for plotting
+
+c216_to_plot <- unique(subset(c216_pathways_genewise, select = c(Description, p_value, intersection_size)))
+
+## To find the proportion of genes enriched in each pathways from the module 
+
+c216_to_plot <- c216_to_plot %>% mutate(c216_to_plot, ratio = (c216_to_plot$intersection_size/216)*100)
+c216_to_plot$ratio <- round(c216_to_plot$ratio, digits = 2)
+
+pdf("./images/figure_4c.pdf", width = 5, height = 4)
+ggplot(c216_to_plot, aes(ratio, Description, fill = -log10(p_value))) +
+  geom_bar(stat="identity", width = 0.6, position="stack") +
+  geom_text(aes(label=intersection_size, vjust=0.4, hjust=-0.2), size = 1.3) +
+  labs(x="Proportion of genes (%)", y = "") +
+  geom_text(aes(label=intersection_size, vjust=0.4, hjust=-0.2), size = 1.3) +
+  scale_fill_continuous(low = "blue", high = "red", limits = c(0,30), breaks = seq(0,30,by =6)) +
+  scale_y_discrete(labels = function(y) str_wrap(y, width = 45)) +
+  scale_x_continuous(expand = c(0.0,0.0), limits = c(0,15), breaks = seq(0,15,by=3), labels = function(x) paste0(x)) +
+  theme_light()+
+  theme(axis.text.y = element_text(size = 4, lineheight = 0.6),
+        axis.text.x = element_text(size = 4),
+        axis.title.x = element_text(size = 5))
+dev.off()
+```
+
+```{r}
+
+## Figure 5. 
+
+## Figure 5B
+
+## Load required packages
+
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+
+## Load gene ontology enrichemnt result of module_1
+
+c177_bp_res <- read.delim("../../results/go_results/mod5_c177_bp_ordered_res.txt", sep = "\t", header = T) # input is sorted according to p-values (lowest to highest)
+
+## Sentence case term name
+
+str_sub(c177_bp_res$term_name, 1, 1) <- str_sub(c177_bp_res$term_name, 1, 1) %>% str_to_upper()
+
+## Subset top 30 results 
+
+c177_bp_top30 <- head(c177_bp_res, 30)
+
+## To find the proportion of genes contribute to each term from the module
+
+data_c177 <- mutate(c177_bp_top30, ratio = (c177_bp_top30$intersection_size/177)*100)
+data_c177$ratio <- round(data_c177$ratio, digits = 2)
+
+pdf("../../images/figure_5b.pdf", width = 5, height = 4.5)
+ggplot(data_c177, aes(x = ratio, y = term_name, fill = -log10(p_value))) +
+  geom_bar(stat="identity", width = 0.6, position="stack") +
+  labs(x="Proportion of genes (%)", y = "") + 
+  geom_text(aes(label=intersection_size, vjust=0.4, hjust=-0.2), size = 1.3) +
+  scale_fill_continuous(low = "blue", high = "red", limits = c(5,25), breaks = seq(5,25,by =5)) +
+  scale_y_discrete(labels = function(y) str_wrap(y, width = 40)) +
+  scale_x_continuous(expand = c(0.0,0.0), limits = c(0,45), breaks = seq(0,45,by=9), labels = function(x) paste0(x)) +
+  theme_light()+
+  theme(axis.text.y = element_text(size = 4, lineheight = 0.6),
+        axis.text.x = element_text(size = 4),
+        axis.title.x = element_text(size = 5))
+dev.off()
+```
+
+```{r}
+
+## Figure 5C
+
+## Load required packages
+
+library(tidyverse)
+library(data.table)
+library(ggplot2)
+
+## Load pathway enrichment results
+
+c177_pathways <- read.delim("../../results/pathways_results/module5_p177_pathways.txt", header = T, sep = "\t")
+
+## To get genewise results 
+
+c177_pathways_genewise <- separate_rows(c177_pathways, intersection, sep = ",")
+
+## Subset required columns for plotting
+
+c177_to_plot <- unique(subset(c177_pathways_genewise, select = c(Description, p_value, intersection_size)))
+
+## To find the proportion of genes enriched in each pathways from the module 
+
+c177_to_plot <- c177_to_plot %>% mutate(c177_to_plot, ratio = (c177_to_plot$intersection_size/177)*100)
+c177_to_plot$ratio <- round(c177_to_plot$ratio, digits = 2)
+
+ggplot(c177_to_plot, aes(ratio, Description, fill = -log10(p_value))) +
+  geom_bar(stat="identity", width = 0.6, position="stack") +
+  geom_text(aes(label=intersection_size, vjust=0.4, hjust=-0.2), size = 1.3) +
+  labs(x="Proportion of genes (%)", y = "") +
+  geom_text(aes(label=intersection_size, vjust=0.4, hjust=-0.2), size = 1.3) +
+  scale_fill_continuous(low = "blue", high = "red", limits = c(0,20), breaks = seq(0,20,by =5)) +
+  scale_y_discrete(labels = function(y) str_wrap(y, width = 40)) +
+  scale_x_continuous(expand = c(0.0,0.0), limits = c(0,12), breaks = seq(0,12,by=3), labels = function(x) paste0(x)) +
+  theme_light()+
+  theme(axis.text.y = element_text(size = 4, lineheight = 0.9),
+        axis.text.x = element_text(size = 4),
+        axis.title.x = element_text(size = 5))
+dev.off()
+```
+
+```{r}
+
+## Figure 6. 
+
+## Figure 6B
+
+## Load required packages
+
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+
+## Load gene ontology enrichemnt result of module_1
+
+c472_bp_res <- read.delim("../../results/go_results/mod7_c472_bp_ordered_res.txt", sep = "\t", header = T) # input is sorted according to p-values (lowest to highest)
+
+## Sentence case term name
+
+str_sub(c472_bp_res$term_name, 1, 1) <- str_sub(c472_bp_res$term_name, 1, 1) %>% str_to_upper()
+
+## Subset top 30 results 
+
+c472_bp_top30 <- head(c472_bp_res, 30)
+
+## To find the proportion of genes contribute to each term from the module
+
+data_c472 <- mutate(c472_bp_top30, ratio = (c472_bp_top30$intersection_size/472)*100)
+data_c472$ratio <- round(data_c472$ratio, digits = 2)
+
+pdf("../../images/figure_6b.pdf", width = 5, height = 4.5)
+ggplot(data_c472, aes(x = ratio, y = term_name, fill = -log10(p_value))) +
+  geom_bar(stat="identity", width = 0.6, position="stack") +
+  labs(x="Proportion of genes (%)", y = "") + 
+  geom_text(aes(label=intersection_size, vjust=0.4, hjust=-0.2), size = 1.3) +
+  scale_fill_continuous(low = "blue", high = "red", limits = c(30,80), breaks = seq(30,80,by =10)) +
+  scale_y_discrete(labels = function(y) str_wrap(y, width = 40)) +
+  scale_x_continuous(expand = c(0.0,0.0), limits = c(0,85), breaks = seq(0,85,by=10), labels = function(x) paste0(x)) +
+  theme_light()+
+  theme(axis.text.y = element_text(size = 4, lineheight = 0.6),
+        axis.text.x = element_text(size = 4),
+        axis.title.x = element_text(size = 5))
+dev.off()
+
+```
+
+```{r}
+
+## Figure 6C
+
+## Load required packages
+
+library(tidyverse)
+library(data.table)
+library(ggplot2)
+
+## Load pathway enrichment results
+
+c472_pathways <- read.delim("../../results/pathways_results/module7_p472_pathways.txt", header = T, sep = "\t")
+
+## To get genewise results 
+
+c472_pathways_genewise <- separate_rows(c472_pathways, intersection, sep = ",")
+
+## Subset required columns for plotting
+
+c472_to_plot <- unique(subset(c472_pathways_genewise, select = c(Description, p_value, intersection_size)))
+
+## To find the proportion of genes enriched in each pathways from the module 
+
+c472_to_plot <- c472_to_plot %>% mutate(c472_to_plot, ratio = (c472_to_plot$intersection_size/472)*100)
+c472_to_plot$ratio <- round(c472_to_plot$ratio, digits = 2)
+c472_to_plot_order <- c472_to_plot[order(c472_to_plot$p_value),]
+c472_head <- head(c472_to_plot_order, 30)
+
+ggplot(c472_head, aes(ratio, Description, fill = -log10(p_value))) +
+  geom_bar(stat="identity", width = 0.6, position="stack") +
+  geom_text(aes(label=intersection_size, vjust=0.4, hjust=-0.2), size = 1.3) +
+  labs(x="Proportion of genes (%)", y = "") +
+  geom_text(aes(label=intersection_size, vjust=0.4, hjust=-0.2), size = 1.3) +
+  scale_fill_continuous(low = "blue", high = "red", limits = c(0,30), breaks = seq(0,30,by =6)) +
+  scale_y_discrete(labels = function(y) str_wrap(y, width = 40)) +
+  scale_x_continuous(expand = c(0.0,0.0), limits = c(0,16), breaks = seq(0,16,by=4), labels = function(x) paste0(x)) +
+  theme_light()+
+  theme(axis.text.y = element_text(size = 4, lineheight = 0.9),
+        axis.text.x = element_text(size = 4),
+        axis.title.x = element_text(size = 5))
+dev.off()
+```

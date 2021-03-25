@@ -1,0 +1,5 @@
+id	name	disease
+3320	HSP90AA1	shared
+9793	CKAP5	grd
+22919	MAPRE1	ms
+23332	CLASP1	shared

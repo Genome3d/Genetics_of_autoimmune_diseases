@@ -1,0 +1,7 @@
+Description	Subcategory	Majorcategory	term_id	query_size	intersection_size	p_value	intersection	source
+Aminoacyl-tRNA biosynthesis	Translation	Genetic Information Processing	KEGG:00970	65	5	0.000223076530926765	WARS,FARS2,LARS2,VARS2,AARS2	KEGG
+Protein export	Folding, sorting and degradation	Genetic Information Processing	KEGG:03060	65	4	0.000223076530926765	SRP54,SEC61G,SRPRB,IMMP2L	KEGG
+Ribosome	Translation	Genetic Information Processing	KEGG:03010	65	11	3.93321131449539e-07	RPL10A,RPS10,RPS11,RPS18,RPS20,RPS26,RPL23,MRPS7,MRPL20,MRPS5,MRPL34	KEGG
+Ribosome biogenesis in eukaryotes	Translation	Genetic Information Processing	KEGG:03008	65	10	1.09269993828185e-07	EIF6,NVL,POP7,GNL3,NOB1,XRN1,RPP25,HEATR1,UTP4,WDR36	KEGG
+RNA degradation	Folding, sorting and degradation	Genetic Information Processing	KEGG:03018	65	12	3.54357306106733e-11	DDX6,CNOT2,PARN,SKIV2L,BTG2,PAN2,CNOT7,XRN1,EXOSC4,DCP1A,EDC3,DIS3L	KEGG
+Sulfur relay system	Folding, sorting and degradation	Genetic Information Processing	KEGG:04122	65	2	0.0103825799776618	NFS1,URM1	KEGG

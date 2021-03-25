@@ -1,0 +1,17 @@
+id	gene	disease	snp_disease	DC	CC	EC
+102	ADAM10	ms	ms	0.273	0.474	0.211
+961	CD47	ra	ra	0.188	0.444	0.188
+1143	CHRNB4	pso	pso	0.188	0.422	0.187
+2204	FCAR	ulc	ulc	0.17	0.419	0.186
+3683	ITGAL	ulc	ulc	0.222	0.448	0.187
+3684	ITGAM	shared	grd,pso,sle	0.278	0.461	0.203
+5328	PLAU	shared	crd,ms,pso	0.182	0.424	0.189
+5906	RAP1A	shared	crd,pso	0.176	0.42	0.173
+8514	KCNAB2	ra	ra	0.233	0.438	0.189
+10043	TOM1	ulc	ulc	0.182	0.425	0.175
+10970	CKAP4	pso	pso	0.278	0.478	0.198
+23250	ATP11A	grd	grd	0.17	0.419	0.186
+28956	LAMTOR2	ms	ms	0.176	0.423	0.187
+79895	ATP8B4	shared	crd,ms,ra,ssc,t1d,ulc	0.17	0.419	0.186
+81619	TSPAN14	crd	crd	0.17	0.419	0.186
+338339	CLEC4D	crd	crd	0.176	0.42	0.186

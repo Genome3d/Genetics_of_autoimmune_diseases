@@ -10,6 +10,10 @@ output: html_document
 
 setwd("/Genetics_of_autoimmune_diseases/scripts/R")
 
+## Load required packages
+
+library(dplyr)
+
 ## Load gene map file
 
 mapfile <- read.delim("../../data/map_file_short.txt", header = T, sep = "\t")

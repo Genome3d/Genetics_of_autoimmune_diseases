@@ -17,6 +17,10 @@ output: html_document
 
 setwd("/Genetics_of_autoimmune_diseases/scripts/R")
 
+## Load required packages
+
+library(data.table)
+
 ## Load 'significant_eqtls.txt' files obtained from CoDeS3D
 
 alo <- read.delim("../../results/codes3d_results/alopecia_allhic/significant_eqtls.txt", header = T, sep = "\t")
@@ -31,7 +35,7 @@ pbc <- read.delim("../../results/codes3d_results/primary_biliary_cirrhosis_allhi
 pso <- read.delim("../../results/codes3d_results/psoriasis_allhic/significant_eqtls.txt", header = T, sep = "\t")
 pa <- read.delim("../../results/codes3d_results/psoriatic_arthritis_allhic/significant_eqtls.txt", header = T, sep = "\t")
 ra <- read.delim("../../results/codes3d_results/rheumatoid_arthritis_allhic/significant_eqtls.txt", header = T, sep = "\t")
-sjs <- read.delim("../../results/codes3d_results/sjögrens_syndrome_allhic/significant_eqtls.txt", header = T, sep = "\t")
+sjs <- read.delim("../../results/codes3d_results/sjögrens_syndrome_allhic/significant_eqtls.txt", header = T, sep = "\t")
 sle <- read.delim("../../results/codes3d_results/systemic_lupus_erythematosus_allhic/significant_eqtls.txt", header = T, sep = "\t")
 ssc <- read.delim("../../results/codes3d_results/systemic_scleroderma_allhic/significant_eqtls.txt", header = T, sep = "\t")
 t1d <- read.delim("../../results/codes3d_results/type_I_diabetes_allhic/significant_eqtls.txt", header = T, sep = "\t")
@@ -171,6 +175,38 @@ genes_by_unique_and_shared_snps <- data.table(intersect(genes_by_shared_snps$gen
 ## To find the number of genes (i.e., unique) regulated only by non-pleiotropic snps
 
 genes_only_by_unique_snps <- data.table(setdiff(genes_by_unique_snps$gene, genes_by_shared_snps$gene))
+
+## To find the number of genes regulated by two or more non-pleiotropic snps (i.e., shared) and those regulated by only one non-pleiotropic snps (i.e., disease-specific)
+
+gene_by_multiple_unique_snps <- merge(genes_only_by_unique_snps, genes_by_unique_snps, by = 'gene')
+
+gene_by_multiple_unique_snps_aggr <- aggregate(disease~gene, gene_by_multiple_unique_snps, function(x) paste(sort(unique(x)), collapse=","))
+
+gene_by_multiple_unique_snps_aggr_len <- aggregate(disease~gene, gene_by_multiple_unique_snps, function(x) length(unique(x)))
+names(gene_by_multiple_unique_snps_aggr_len)[2] = "snp_disease_len"
+
+## Merge the above two dataframes
+
+gene_by_multi_unique_snps_merge <- merge(gene_by_multiple_unique_snps_aggr, gene_by_multiple_unique_snps_aggr_len)
+
+## shared genes (regulated by >2 non-pleiotropic snps associated with different diseases)
+
+sub_shared_genes <-  gene_by_multi_unique_snps_merge[gene_by_multi_unique_snps_merge$snp_disease_len >= 2,]
+
+## disease-specific genes
+
+sub_unique_genes <- gene_by_multi_unique_snps_merge[gene_by_multi_unique_snps_merge$snp_disease_len == 1,]
+
+genes_only_by_multi_unique_snps <- data.table(intersect(sub_shared_genes$gene, gene_by_multi_unique_snps_merge$gene))
+names(genes_only_by_multi_unique_snps) <- "gene"
+genes_by_multi_unique_snps_unique <-  data.table(intersect(sub_unique_genes$gene, gene_by_multi_unique_snps_merge$gene))
+names(genes_by_multi_unique_snps_unique) <- "gene"
+
+## Identical, shared and disease-specific genes 
+
+identical_genes <- genes_only_by_shared_snps
+shared_genes <- rbind(genes_by_unique_and_shared_snps, genes_only_by_multi_unique_snps)
+unique_gene <- genes_by_multi_unique_snps_unique
 
 ```
 

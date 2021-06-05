@@ -279,6 +279,7 @@ dev.off()
 
 library(haploR)
 library(tidyverse)
+library(stringr)
 
 alo_eqtl <- unique(subset(alo, select = c("snp")))
 as_eqtl <- unique(subset(as, select = c("snp")))

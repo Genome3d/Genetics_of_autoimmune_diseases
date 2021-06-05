@@ -141,6 +141,7 @@ genes_by_unique_and_shared_snps <- data.table(intersect(genes_by_shared_snps$gen
 
 genes_only_by_unique_snps <- data.table(setdiff(genes_by_unique_snps$gene, genes_by_shared_snps$gene)) 
 
+
 ```
 
 ```{r}
@@ -271,6 +272,100 @@ ggplot(genes_tissues_type_to_plot, aes(x = factor(tissue_count_to_plot, levels=c
         axis.text.y = element_text(colour = "black"),
         axis.text.x = element_text(colour = "black"))
 dev.off()
+
+## Supplementary Figure 1
+
+## required packages
+
+library(haploR)
+library(tidyverse)
+
+alo_eqtl <- unique(subset(alo, select = c("snp")))
+as_eqtl <- unique(subset(as, select = c("snp")))
+ced_eqtl <- unique(subset(ced, select = c("snp")))
+crd_eqtl <- unique(subset(crd, select = c("snp")))
+ee_eqtl <- unique(subset(ee, select = c("snp")))
+jia_eqtl <- unique(subset(jia, select = c("snp")))
+grd_eqtl <- unique(subset(grd, select = c("snp")))
+ms_eqtl <- unique(subset(ms, select = c("snp")))
+pbc_eqtl <- unique(subset(pbc, select = c("snp")))
+pso_eqtl <- unique(subset(pso, select = c("snp")))
+pa_eqtl <- unique(subset(pa, select = c("snp")))
+ra_eqtl <- unique(subset(ra, select = c("snp")))
+sjs_eqtl <- unique(subset(sjs, select = c("snp")))
+sle_eqtl <- unique(subset(sle, select = c("snp")))
+ssc_eqtl <- unique(subset(ssc, select = c("snp")))
+t1d_eqtl <- unique(subset(t1d, select = c("snp")))
+ulc_eqtl <- unique(subset(ulc, select = c("snp")))
+vit_eqtl <- unique(subset(vit, select = c("snp")))
+
+eqtls <- unique(rbind(alo_eqtl,as_eqtl,ced_eqtl,crd_eqtl,ee_eqtl,jia_eqtl,grd_eqtl,ms_eqtl,pbc_eqtl,pso_eqtl,
+                      pa_eqtl,ra_eqtl,sjs_eqtl,sle_eqtl,ssc_eqtl,t1d_eqtl,ulc_eqtl,vit_eqtl))
+
+## Query haploreg
+
+haplor_res <- queryHaploreg(query = eqtls$snp, 
+                          ldThresh = NA,
+                          ldPop = "EUR",
+                          url = "https://pubs.broadinstitute.org/mammals/haploreg/haploreg.php",
+                          verbose = T,
+                          timeout = 1000000)
+
+## Subset required columns
+
+haplor_res_subset <- haplor_res  %>% dplyr::select(query_snp_rsid, dbSNP_functional_annotation, 
+                                            GENCODE_id, GENCODE_name)
+
+## Rename annotations
+
+haplor_res_subset$dbSNP_functional_annotation <-
+  str_replace_all(haplor_res_subset$dbSNP_functional_annotation, c("\\." = "Intergenic",
+                                                                   "INT" = "Intronic",
+                                                                   "U3" = "3'-UTR",
+                                                                   "SYN" = "Synonymous",
+                                                                   "NSM" = "Missense",
+                                                                   "U5" = "5'-UTR",
+                                                                   "NSN" = "Nonsense",
+                                                                   "NSF" = "Frameshift"))
+
+# separate SNPs with multiple consequences (due to isoforms of a gene) each to a new row
+
+haplor_res_subset_sep <- haplor_res_subset %>% 
+  mutate(dbSNP_functional_annotation = strsplit(dbSNP_functional_annotation, ";")) %>%
+  unnest(dbSNP_functional_annotation)
+
+# Data manipulation to plot the results
+
+No_of_snps <- aggregate(query_snp_rsid ~ dbSNP_functional_annotation,
+                        haplor_res_subset_sep, 
+                        function(x) paste(length(unique(x)), collapse = ","))
+
+No_of_snps <- No_of_snps %>% mutate(prop = (as.numeric(query_snp_rsid)/2083)) %>% 
+  arrange(desc(as.numeric(query_snp_rsid)))
+
+No_of_snps$dbSNP_functional_annotation <- factor(No_of_snps$dbSNP_functional_annotation,
+                                                 levels = c("Intergenic", "Intronic", "Missense",
+                                                            "3'-UTR", "Synonymous", "5'-UTR", "Nonsense"))
+
+#pdf("../../images/snp_annotation_bar.pdf", width = 5.5, height = 4)
+ggplot(No_of_snps, aes(x=dbSNP_functional_annotation, y = prop)) +
+  geom_bar(stat="identity", width=0.5, position = "dodge", fill = "darkgoldenrod2") +
+  geom_text(aes(label = paste0("N=", query_snp_rsid)), vjust = -0.5, hjust = 0.4, size = 2,
+            position = position_dodge(width = 0.7)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1), expand = c(0.01,0.01), limits = c(0, 0.5), breaks = seq(0, 0.5, by = 0.1))+
+  labs(fill = "", y = "Percentage", x = "SNP functional class") +
+  theme_linedraw()+
+  theme(axis.text.x = element_text(angle = 45, hjust=1, size = 7),
+        axis.text.y = element_text(size = 7),
+        panel.grid.major = element_line(size = 0.05, colour = "gray"),
+        panel.grid.minor = element_line(size = 0.02, colour = "gray"),
+        axis.title = element_text(size = 9),
+        legend.position = c(.9,.9),
+        legend.background = element_blank(),
+        legend.text = element_text(size = 5),
+        legend.key.size = unit(0.3, "cm"))
+#dev.off()
+
 ```
 
 ```{r message=F}
@@ -1112,3 +1207,6 @@ ggplot(c472_head, aes(ratio, Description, fill = -log10(p_value))) +
         axis.title.x = element_text(size = 5))
 dev.off()
 ```
+
+
+
